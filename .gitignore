@@ -5,6 +5,9 @@ env/
 *.png
 *.jpg
 *.jpeg
+
+# Allow SJB logo for public access
+!Video/sjb-property-video/public/logo.png
 Generated Images/
 1.SJB Property/
 Business Overview/
@@ -12,3 +15,8 @@ Business Overview/
 *.env
 *.docx
 package-lock.json
+
+# Claude Code / Superpowers skill files
+.agents/
+.claude/
+skills-lock.json
