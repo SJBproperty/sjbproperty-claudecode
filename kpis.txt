@@ -1,0 +1,41 @@
+============================================
+SJB PROPERTY GROUP — KEY PERFORMANCE INDICATORS
+============================================
+Update monthly. Claude Code can use these to track progress and create reports.
+
+MONTH: [e.g. February 2026]
+
+FINANCIAL KPIs:
+- Monthly Revenue: £
+- Monthly Profit: £
+- Revenue vs Target: [On track / Behind / Ahead]
+- Cash Position: £
+
+DEAL KPIs:
+- Deals Sourced This Month: [number]
+- Deals Completed This Month: [number]
+- Average ROI on Completed Deals: [%]
+- Pipeline Value: £ [total value of deals in progress]
+
+PORTFOLIO KPIs:
+- Total Units Managed: [number]
+- Occupancy Rate: [%]
+- Average Yield: [%]
+- Rent Arrears: £
+
+INVESTOR KPIs:
+- New Investor Enquiries This Month: [number]
+- New Investors Onboarded: [number]
+- Total Active Investors: [number]
+- Investor Retention Rate: [%]
+
+CONTENT / MARKETING KPIs:
+- Instagram Followers: [number]
+- YouTube Subscribers: [number]
+- LinkedIn Connections: [number]
+- Website Visitors: [number]
+- Leads Generated from Content: [number]
+- DMs / Enquiries from Social: [number]
+
+NOTES:
+[Any context on the numbers — what went well, what didn't]

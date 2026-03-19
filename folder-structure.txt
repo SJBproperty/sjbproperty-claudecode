@@ -1,0 +1,92 @@
+============================================
+SJB PROPERTY GROUP — MASTER FOLDER STRUCTURE
+============================================
+
+ClaudeCode/
+│
+├── _BusinessOverview/
+│   └── business-overview.txt          ← Master overview (copied into subfolders that need it)
+│
+├── SJBProperty/
+│   │
+│   ├── BrandInfo/
+│   │   ├── business-overview.txt      ← Copy from _BusinessOverview
+│   │   ├── brand-guidelines.txt
+│   │   └── company-bio.txt
+│   │
+│   ├── SocialMedia/
+│   │   ├── business-overview.txt      ← Copy from _BusinessOverview
+│   │   ├── platforms.txt
+│   │   ├── tone-of-voice.txt
+│   │   ├── target-audience.txt
+│   │   ├── content-strategy.txt
+│   │   ├── content-calendar.txt
+│   │   ├── Instagram/
+│   │   │   ├── posts/
+│   │   │   ├── reels/
+│   │   │   └── stories/
+│   │   ├── YouTube/
+│   │   │   ├── scripts/
+│   │   │   ├── thumbnails/
+│   │   │   └── shorts/
+│   │   ├── LinkedIn/
+│   │   │   └── posts/
+│   │   ├── TikTok/
+│   │   │   └── scripts/
+│   │   └── Email/
+│   │       └── newsletters/
+│   │
+│   ├── Accounts/
+│   │   ├── business-overview.txt      ← Copy from _BusinessOverview
+│   │   ├── finances-overview.txt
+│   │   ├── tax-returns.txt
+│   │   ├── revenue.txt
+│   │   ├── expenses.txt
+│   │   └── kpis.txt
+│   │
+│   ├── TrackRecord/
+│   │   ├── business-overview.txt      ← Copy from _BusinessOverview
+│   │   ├── deals.txt
+│   │   ├── roi-summary.txt
+│   │   ├── success-stories.txt
+│   │   ├── investor-roi.txt
+│   │   └── testimonials.txt
+│   │
+│   ├── Goals/
+│   │   ├── business-overview.txt      ← Copy from _BusinessOverview
+│   │   ├── revenue-targets.txt
+│   │   ├── growth-milestones.txt
+│   │   └── vision.txt
+│   │
+│   ├── Team/
+│   │   ├── business-overview.txt      ← Copy from _BusinessOverview
+│   │   ├── team-overview.txt
+│   │   └── roles-responsibilities.txt
+│   │
+│   ├── Processes/
+│   │   ├── business-overview.txt      ← Copy from _BusinessOverview
+│   │   ├── sops-overview.txt
+│   │   ├── deal-sourcing-sop.txt
+│   │   ├── refurb-management-sop.txt
+│   │   ├── tenant-management-sop.txt
+│   │   ├── investor-onboarding-sop.txt
+│   │   └── content-creation-sop.txt
+│   │
+│   ├── Priorities/
+│   │   ├── business-overview.txt      ← Copy from _BusinessOverview
+│   │   ├── this-week.txt
+│   │   ├── urgent.txt
+│   │   └── whats-next.txt
+│   │
+│   ├── BusinessModel/
+│   │   ├── business-overview.txt      ← Copy from _BusinessOverview
+│   │   ├── what-we-sell.txt
+│   │   ├── market-overview.txt
+│   │   ├── revenue-streams.txt
+│   │   └── sales-process.txt
+│   │
+│   └── Offers/
+│       ├── business-overview.txt      ← Copy from _BusinessOverview
+│       ├── funnels.txt
+│       ├── pricing-packages.txt
+│       └── sales-process.txt

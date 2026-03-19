@@ -1,0 +1,14 @@
+node_modules
+out/
+env/
+*.mp4
+*.png
+*.jpg
+*.jpeg
+Generated Images/
+1.SJB Property/
+Business Overview/
+*.csv
+*.env
+*.docx
+package-lock.json
