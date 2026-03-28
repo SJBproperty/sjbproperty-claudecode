@@ -10,10 +10,19 @@ const PROPERTY_SIC_CODES = '68100,68209,68320';
 
 const DB_PATH = path.join(__dirname, '..', '..', 'data', 'sjb-leads.db');
 
+const CCOD_PATH = path.join(__dirname, '..', '..', 'data', 'CCOD_FULL.csv');
+
+const EXPORTS_DIR = path.join(__dirname, '..', '..', 'data', 'exports');
+
+const HMO_DIR = path.join(__dirname, '..', '..', 'data', 'hmo-registers');
+
 module.exports = {
   POSTCODES,
   EPC_API_BASE,
   CH_API_BASE,
   PROPERTY_SIC_CODES,
   DB_PATH,
+  CCOD_PATH,
+  EXPORTS_DIR,
+  HMO_DIR,
 };
