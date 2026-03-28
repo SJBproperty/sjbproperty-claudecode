@@ -43,6 +43,13 @@ Plans:
 
 **Requirements:** DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Schema migration, shared libraries, and Land Registry CCOD importer
+- [ ] 02-02-PLAN.md — HMO register parser and OpenRent/Rightmove Apify result processors
+- [ ] 02-03-PLAN.md — Deduplication engine and CSV export pipeline
+
 **Success Criteria:**
 1. Land Registry CCOD corporate ownership data for target postcodes loaded into database
 2. OpenRent self-managing landlords in target areas captured with listing quality and void period data
@@ -139,9 +146,9 @@ Plans:
 ## Phase Dependencies
 
 ```
-Phase 1 ──→ Phase 2 ──→ Phase 3 ──→ Phase 4 ──→ Phase 5 ──→ Phase 6
+Phase 1 ──> Phase 2 ──> Phase 3 ──> Phase 4 ──> Phase 5 ──> Phase 6
 (Data)      (Sources)    (Score/CRM)  (Compliance)  (BTL)       (R2R)
-                                      │
+                                      |
                                       └─ Email warmup starts (3-4 weeks)
                                          Must complete before Phase 5 email
 ```
@@ -162,4 +169,4 @@ All 28 v1 requirements mapped. No orphans.
 
 ---
 *Roadmap created: 2026-03-28*
-*Last updated: 2026-03-28 after Phase 1 execution complete (3/3 plans)*
+*Last updated: 2026-03-28 after Phase 2 planning complete (3 plans)*
