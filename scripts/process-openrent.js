@@ -22,9 +22,12 @@ function extractPostcode(result) {
   if (result.postcode) return result.postcode.trim();
 
   const address = result.address || result.propertyAddress || result.title || '';
-  // Match UK postcode pattern at end of string
-  const match = address.match(/([A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2})\s*$/i);
-  return match ? match[1].trim() : '';
+  // Try full postcode first (e.g., "SK1 3AA")
+  const fullMatch = address.match(/([A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2})\s*$/i);
+  if (fullMatch) return fullMatch[1].trim();
+  // Fall back to outcode-only at end of address (e.g., "Stockport SK1")
+  const outcodeMatch = address.match(/\b([A-Z]{1,2}\d[A-Z\d]?)\s*$/i);
+  return outcodeMatch ? outcodeMatch[1].trim() : '';
 }
 
 /**
