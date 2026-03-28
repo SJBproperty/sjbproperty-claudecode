@@ -95,40 +95,40 @@ Deferred to after first campaign results are in.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | TBD | Pending |
-| INFRA-02 | TBD | Pending |
-| INFRA-03 | TBD | Pending |
-| INFRA-04 | TBD | Pending |
-| DATA-01 | TBD | Pending |
-| DATA-02 | TBD | Pending |
-| DATA-03 | TBD | Pending |
-| DATA-04 | TBD | Pending |
-| INTEL-01 | TBD | Pending |
-| INTEL-02 | TBD | Pending |
-| INTEL-03 | TBD | Pending |
-| INTEL-04 | TBD | Pending |
-| INTEL-05 | TBD | Pending |
-| CRM-01 | TBD | Pending |
-| CRM-02 | TBD | Pending |
-| CRM-03 | TBD | Pending |
-| OUT-BTL-01 | TBD | Pending |
-| OUT-BTL-02 | TBD | Pending |
-| OUT-BTL-03 | TBD | Pending |
-| OUT-BTL-04 | TBD | Pending |
-| OUT-R2R-01 | TBD | Pending |
-| OUT-R2R-02 | TBD | Pending |
-| OUT-R2R-03 | TBD | Pending |
-| OUT-R2R-04 | TBD | Pending |
-| COMP-01 | TBD | Pending |
-| COMP-02 | TBD | Pending |
-| COMP-03 | TBD | Pending |
-| COMP-04 | TBD | Pending |
+| INFRA-01 | Phase 1 | Pending |
+| INFRA-02 | Phase 1 | Pending |
+| INFRA-03 | Phase 1 | Pending |
+| INFRA-04 | Phase 1 | Pending |
+| DATA-01 | Phase 2 | Pending |
+| DATA-02 | Phase 2 | Pending |
+| DATA-03 | Phase 2 | Pending |
+| DATA-04 | Phase 2 | Pending |
+| INTEL-01 | Phase 2 | Pending |
+| INTEL-02 | Phase 3 | Pending |
+| INTEL-03 | Phase 3 | Pending |
+| INTEL-04 | Phase 3 | Pending |
+| INTEL-05 | Phase 3 | Pending |
+| CRM-01 | Phase 3 | Pending |
+| CRM-02 | Phase 3 | Pending |
+| CRM-03 | Phase 3 | Pending |
+| OUT-BTL-01 | Phase 5 | Pending |
+| OUT-BTL-02 | Phase 5 | Pending |
+| OUT-BTL-03 | Phase 5 | Pending |
+| OUT-BTL-04 | Phase 5 | Pending |
+| OUT-R2R-01 | Phase 6 | Pending |
+| OUT-R2R-02 | Phase 6 | Pending |
+| OUT-R2R-03 | Phase 6 | Pending |
+| OUT-R2R-04 | Phase 6 | Pending |
+| COMP-01 | Phase 4 | Pending |
+| COMP-02 | Phase 4 | Pending |
+| COMP-03 | Phase 4 | Pending |
+| COMP-04 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 28 total
-- Mapped to phases: 0
-- Unmapped: 28 (awaiting roadmap creation)
+- Mapped to phases: 28
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-28*
-*Last updated: 2026-03-28 after initial definition*
+*Last updated: 2026-03-28 after roadmap creation*
