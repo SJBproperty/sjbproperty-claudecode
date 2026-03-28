@@ -18,8 +18,8 @@
 
 Plans:
 - [x] 01-01-PLAN.md — Project scaffold, database schema, shared libraries, MCP configuration
-- [ ] 01-02-PLAN.md — EPC Register API scraper and Playwright fallback
-- [ ] 01-03-PLAN.md — Companies House API scraper with entity classification
+- [x] 01-02-PLAN.md — EPC Register API scraper and Playwright fallback
+- [x] 01-03-PLAN.md — Companies House API scraper with entity classification
 
 **Success Criteria:**
 1. SQLite database exists with landlord, property, and lead tables including entity type field (Ltd/LLP vs sole trader) and source provenance
@@ -162,4 +162,4 @@ All 28 v1 requirements mapped. No orphans.
 
 ---
 *Roadmap created: 2026-03-28*
-*Last updated: 2026-03-28 after Phase 1 planning*
+*Last updated: 2026-03-28 after Phase 1 execution complete (3/3 plans)*

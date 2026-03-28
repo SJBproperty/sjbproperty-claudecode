@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-03-28T12:27:07.092Z"
+last_updated: "2026-03-28T12:42:29.000Z"
 progress:
   total_phases: 6
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 0
+  completed_plans: 3
 ---
 
 # Project State: SJB Property Management Launch
@@ -18,8 +18,8 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-28)
 
 **Core value:** Build a reliable, repeatable pipeline that identifies tired landlords and converts them into long-term property management clients
-**Current focus:** Phase 01 — data-foundation
-**Current Plan:** 3 of 3 in Phase 01
+**Current focus:** Phase 01 complete — ready for Phase 02
+**Current Plan:** Phase 01 complete (3/3 plans)
 
 ## Current Milestone
 
@@ -30,7 +30,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 
 | Phase | Name | Status | Progress |
 |-------|------|--------|----------|
-| 1 | Data Foundation | ◐ In Progress | 67% (2/3 plans) |
+| 1 | Data Foundation | ● Complete | 100% (3/3 plans) |
 | 2 | Data Sources & Deduplication | ○ Pending | 0% |
 | 3 | Lead Scoring & CRM | ○ Pending | 0% |
 | 4 | Compliance & Outreach Infrastructure | ○ Pending | 0% |
@@ -53,6 +53,9 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2026-03-28 | Strict tenure filter: 'Rented (private)' exact match | Avoids confusion with transaction-type field |
 | 2026-03-28 | Companies House MCP via claude mcp add | Not project dependency; npx handles installation |
 | 2026-03-28 | Temp test DB in os.tmpdir() | Avoids polluting production data/sjb-leads.db |
+| 2026-03-28 | Area-based CH search (Stockport, Manchester) | CH API uses location text not postcode filtering |
+| 2026-03-28 | 550 safety threshold for CH rate limit | 50-request buffer below 600 limit prevents 429 errors |
+| 2026-03-28 | Officers logged not stored in DB | Valuable for Phase 3 enrichment but no schema column yet |
 
 ## Performance Metrics
 
@@ -60,11 +63,12 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 |------------|----------|-------|-------|
 | 01-01 | 3min | 2 | 7 |
 | 01-02 | 3min | 2 | 3 |
+| 01-03 | 3min | 1 | 2 |
 
 ## Blockers
 
 None currently.
 
 ---
-*Last session: 2026-03-28T12:36:57Z*
-*Stopped at: Completed 01-02-PLAN.md*
+*Last session: 2026-03-28T12:42:29Z*
+*Stopped at: Completed 01-03-PLAN.md — Phase 01 complete*
