@@ -16,10 +16,11 @@ Build a reliable, repeatable pipeline that identifies landlords who are struggli
 - [x] Scrape landlord data from Companies House (SPV identification by SIC code, entity classification, director lookup) — Validated in Phase 01: Data Foundation
 - [x] SQLite database with landlord/property entities, source provenance, and entity type classification — Validated in Phase 01: Data Foundation
 - [x] MCP tooling configured (Apify, Companies House) for Claude Code orchestration — Validated in Phase 01: Data Foundation
+- [x] Scrape and compile landlord data from 5 sources: CCOD, HMO registers, OpenRent, Rightmove/Zoopla, EPC Register — Validated in Phase 02: Data Sources & Deduplication
+- [x] Deduplicate landlord records into unified profiles with source provenance — Validated in Phase 02: Data Sources & Deduplication
 
 ### Active
 
-- [ ] Scrape and compile landlord data from 5 sources: Council HMO licensing registers, HM Land Registry, Companies House, Rightmove/Zoopla/OpenRent, EPC Register
 - [ ] Detect tired landlord signals: long void periods (30+ days), poor listing quality, compliance red flags (EPC/gas safety/EICR gaps), multi-property ownership
 - [ ] Enrich leads with contact details, property portfolio size, and compliance status
 - [ ] Score leads by likelihood of needing management services (BTL management vs R2R suitability)
@@ -110,4 +111,4 @@ Build a reliable, repeatable pipeline that identifies landlords who are struggli
 | CRM setup required | No existing CRM — need to establish from scratch as part of this project | — Pending |
 
 ---
-*Last updated: 2026-03-28 — Phase 01 (Data Foundation) complete*
+*Last updated: 2026-03-28 — Phase 02 (Data Sources & Deduplication) complete*
