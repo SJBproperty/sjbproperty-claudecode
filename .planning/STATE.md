@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: 3
+current_plan: 1
 status: executing
-last_updated: "2026-03-28T15:45:00.000Z"
+last_updated: "2026-03-28T15:55:00.000Z"
 progress:
   total_phases: 6
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Project State: SJB Property Management Launch
@@ -19,8 +19,8 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-28)
 
 **Core value:** Build a reliable, repeatable pipeline that identifies tired landlords and converts them into long-term property management clients
-**Current focus:** Phase 02 — data-sources-deduplication
-**Current Plan:** 3
+**Current focus:** Phase 03 — lead-scoring-crm
+**Current Plan:** 1
 
 ## Current Milestone
 
@@ -32,8 +32,8 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | Phase | Name | Status | Progress |
 |-------|------|--------|----------|
 | 1 | Data Foundation | ● Complete | 100% (3/3 plans) |
-| 2 | Data Sources & Deduplication | ◐ In Progress | 50% (2/4 plans) |
-| 3 | Lead Scoring & CRM | ○ Pending | 0% |
+| 2 | Data Sources & Deduplication | ● Complete | 100% (3/3 plans) |
+| 3 | Lead Scoring & CRM | ◐ In Progress | 0% |
 | 4 | Compliance & Outreach Infrastructure | ○ Pending | 0% |
 | 5 | BTL Management Campaign | ○ Pending | 0% |
 | 6 | R2R Pipeline (HMO Only) | ○ Pending | 0% |
@@ -64,6 +64,10 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2026-03-28 | OpenRent source_ref stores self-managing vs agent-managed | Aids lead prioritisation — self-managing landlords are warmer leads |
 | 2026-03-28 | Rightmove creates no landlord records | Listings show agents not landlords; landlord matching via deduplication |
 | 2026-03-28 | Synchronous HMO parser (csv-parse/sync) | HMO register files typically <10K rows, no need for streaming |
+| 2026-03-28 | Fuse.js threshold 0.3, auto-merge <0.2, reject >0.4 | Balances precision vs recall for landlord name matching |
+| 2026-03-28 | Source priority: CH > EPC > CCOD > HMO > OpenRent > Rightmove | Companies House data most authoritative for company identity |
+| 2026-03-28 | Fuzzy matching scoped to same postcode outcode | Prevents false positives across geographies |
+| 2026-03-28 | Review matches exported as pairs for manual inspection | Simpler to review A-vs-B than grouped clusters |
 
 ## Performance Metrics
 
@@ -74,11 +78,12 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 01-03 | 3min | 1 | 2 |
 | 02-01 | 3min | 2 | 7 |
 | 02-02 | 4min | 2 | 6 |
+| 02-03 | 4min | 2 | 4 |
 
 ## Blockers
 
 None currently.
 
 ---
-*Last session: 2026-03-28T15:45:00Z*
-*Stopped at: Completed 02-02-PLAN.md*
+*Last session: 2026-03-28T15:55:00Z*
+*Stopped at: Completed 02-03-PLAN.md — Phase 2 complete*
