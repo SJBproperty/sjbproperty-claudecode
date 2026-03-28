@@ -84,7 +84,7 @@ Plans:
 **Plans:** 4 plans
 
 Plans:
-- [ ] 02.1-01-PLAN.md — Run EPC/CH APIs + fix and import HMO registers + create validation script
+- [x] 02.1-01-PLAN.md — Run EPC/CH APIs + fix and import HMO registers + create validation script
 - [ ] 02.1-02-PLAN.md — Download and import Land Registry CCOD dataset
 - [ ] 02.1-03-PLAN.md — Discover and run Apify actors for OpenRent, Rightmove, Zoopla
 - [ ] 02.1-04-PLAN.md — Run deduplication engine and produce CSV exports

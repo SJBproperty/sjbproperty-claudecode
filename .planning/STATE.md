@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: Not started
-status: planning
-last_updated: "2026-03-28T15:59:20.494Z"
+current_plan: 2
+status: executing
+last_updated: "2026-03-28T17:08:25Z"
 progress:
-  total_phases: 6
+  total_phases: 7
   completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 10
+  completed_plans: 7
 ---
 
 # Project State: SJB Property Management Launch
@@ -19,13 +19,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-28)
 
 **Core value:** Build a reliable, repeatable pipeline that identifies tired landlords and converts them into long-term property management clients
-**Current focus:** Phase 03 — lead-scoring-crm
-**Current Plan:** Not started
+**Current focus:** Phase 02.1 — data-gathering-scraping
+**Current Plan:** 2
 
 ## Current Milestone
 
 **Milestone 1:** Landlord Lead Generation Pipeline (v1)
-**Status:** Ready to plan
+**Status:** Executing Phase 02.1
 
 ## Phase Status
 
@@ -79,10 +79,12 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 02-01 | 3min | 2 | 7 |
 | 02-02 | 4min | 2 | 6 |
 | 02-03 | 4min | 2 | 4 |
+| 02.1-01 | 9min | 1 | 3 |
 
 ## Accumulated Context
 
 ### Roadmap Evolution
+
 - Phase 02.1 inserted after Phase 2: Data Gathering & Scraping (URGENT) — Phase 2 built processors but never ran scrapers or Apify actors to populate DB with real data. Includes Google Maps Street View as an additional qualifying layer on top-priority leads (those already flagged by Rightmove data, low EPC grades, etc.) to help Sam visually assess property condition before contact decisions.
 
 ## Blockers
@@ -90,5 +92,5 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 None currently.
 
 ---
-*Last session: 2026-03-28T15:55:00Z*
-*Stopped at: Completed 02-03-PLAN.md — Phase 2 complete*
+*Last session: 2026-03-28T17:08:25Z*
+*Stopped at: Completed 02.1-01-PLAN.md — EPC/CH/HMO imports done*
