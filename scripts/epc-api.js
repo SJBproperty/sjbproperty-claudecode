@@ -4,7 +4,7 @@ const db = require('./lib/db');
 const { POSTCODES, EPC_API_BASE } = require('./lib/config');
 
 // --- Auth ---
-const EPC_EMAIL = process.env.EPC_EMAIL;
+const EPC_EMAIL = process.env.EPC_API_EMAIL || process.env.EPC_EMAIL;
 const EPC_API_KEY = process.env.EPC_API_KEY;
 const AUTH = Buffer.from(`${EPC_EMAIL}:${EPC_API_KEY}`).toString('base64');
 
@@ -17,11 +17,13 @@ const AUTH = Buffer.from(`${EPC_EMAIL}:${EPC_API_KEY}`).toString('base64');
  * @returns {string} Full URL
  */
 function buildURL(postcode, searchAfter = null) {
-  const params = new URLSearchParams({
-    postcode: postcode,
-    'energy-band': 'd,e,f,g',
-    size: '5000',
-  });
+  const params = new URLSearchParams();
+  params.set('postcode', postcode);
+  // EPC API requires separate energy-band parameters for each rating
+  for (const band of ['d', 'e', 'f', 'g']) {
+    params.append('energy-band', band);
+  }
+  params.set('size', '5000');
   if (searchAfter) {
     params.set('search-after', searchAfter);
   }

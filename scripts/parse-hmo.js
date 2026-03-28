@@ -20,24 +20,73 @@ const { normaliseAddress, normaliseName, extractPostcodeOutcode } = require('./l
 // Column mappings per council — each field has an array of possible header names
 const COLUMN_MAPS = {
   stockport: {
-    name: ['Licence Holder', 'Landlord Name', 'Licence Holder Name'],
-    address: ['Address', 'Property Address', 'Address of HMO'],
-    postcode: ['Postcode', 'Post Code', 'Property Postcode'],
-    licence: ['Licence Number', 'HMO Licence', 'Licence No', 'License Number'],
+    name: ['Name & address of licence holder', 'Licence Holder', 'Landlord Name', 'Licence Holder Name'],
+    address: ['Address of licenced HMO', 'Address', 'Property Address', 'Address of HMO'],
+    postcode: ['Post code', 'Postcode', 'Post Code', 'Property Postcode'],
+    licence: ['Licence Ref.', 'Licence Number', 'HMO Licence', 'Licence No', 'License Number'],
   },
   manchester: {
-    name: ['Licence Holder', 'Landlord Name', 'Applicant Name'],
-    address: ['Address', 'Property Address', 'HMO Address'],
+    name: ['Licence Holder Name', 'Licence Holder', 'Landlord Name', 'Applicant Name'],
+    address: ['premises address', 'Address', 'Property Address', 'HMO Address'],
     postcode: ['Postcode', 'Post Code', 'Property Postcode'],
     licence: ['Licence Number', 'HMO Licence', 'Licence Ref'],
   },
   _default: {
-    name: ['Licence Holder', 'Landlord Name', 'Licence Holder Name', 'Applicant Name', 'Name'],
-    address: ['Address', 'Property Address', 'HMO Address', 'Address of HMO'],
-    postcode: ['Postcode', 'Post Code', 'Property Postcode'],
-    licence: ['Licence Number', 'HMO Licence', 'Licence No', 'License Number', 'Licence Ref'],
+    name: ['Name & address of licence holder', 'Licence Holder Name', 'Licence Holder', 'Landlord Name', 'Applicant Name', 'Name'],
+    address: ['Address of licenced HMO', 'premises address', 'Address', 'Property Address', 'HMO Address', 'Address of HMO'],
+    postcode: ['Post code', 'Postcode', 'Post Code', 'Property Postcode'],
+    licence: ['Licence Ref.', 'Licence Number', 'HMO Licence', 'Licence No', 'License Number', 'Licence Ref'],
   },
 };
+
+// UK postcode regex
+const POSTCODE_REGEX = /([A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2})/i;
+
+/**
+ * Split a combined "Name & address of licence holder" field into name and address parts.
+ * Format: "Mr Simon Farrell 22a Crossefield Road, Cheadle, SK8 5PE"
+ * Strategy: find the first house number pattern and split there.
+ */
+function splitNameAndAddress(combined) {
+  if (!combined || combined.trim() === '') return { name: '', address: '' };
+
+  const trimmed = combined.trim();
+
+  // Find the first house number pattern (digits possibly followed by a letter, then space)
+  const houseNumMatch = trimmed.match(/(\d+[a-z]?\s)/i);
+  if (houseNumMatch) {
+    const splitIdx = trimmed.indexOf(houseNumMatch[0]);
+    if (splitIdx > 0) {
+      const namePart = trimmed.substring(0, splitIdx).trim();
+      const addressPart = trimmed.substring(splitIdx).trim();
+      if (namePart.length > 0) {
+        return { name: namePart, address: addressPart };
+      }
+    }
+  }
+
+  // Fallback: take first 2-3 words as name
+  const words = trimmed.split(/\s+/);
+  if (words.length >= 3) {
+    // Check if word 3 looks like a title/name word (not a number)
+    const nameWords = /^\d/.test(words[2]) ? 2 : 3;
+    return {
+      name: words.slice(0, nameWords).join(' '),
+      address: words.slice(nameWords).join(' '),
+    };
+  }
+
+  return { name: trimmed, address: '' };
+}
+
+/**
+ * Extract postcode from an address string (used when no standalone postcode column exists).
+ */
+function extractPostcodeFromAddress(address) {
+  if (!address) return '';
+  const match = address.match(POSTCODE_REGEX);
+  return match ? match[1].trim() : '';
+}
 
 /**
  * Resolve column mapping: for each field, find the first matching header.
@@ -170,10 +219,22 @@ function parseHmo(filePath, councilName, db) {
 
     const txn = db.transaction((batchRows) => {
       for (const row of batchRows) {
-        const name = row[mapping.name] || '';
-        const address = row[mapping.address] || '';
-        const postcode = mapping.postcode ? (row[mapping.postcode] || '') : '';
+        let name = row[mapping.name] || '';
+        let address = row[mapping.address] || '';
+        let postcode = mapping.postcode ? (row[mapping.postcode] || '') : '';
         const licence = mapping.licence ? (row[mapping.licence] || '') : '';
+
+        // Special handling: Stockport "Name & address of licence holder" combined field
+        if (mapping.name === 'Name & address of licence holder' && name) {
+          const parts = splitNameAndAddress(name);
+          name = parts.name;
+          // Don't overwrite address from the dedicated address column
+        }
+
+        // Special handling: no standalone postcode column — extract from address
+        if (!postcode && address) {
+          postcode = extractPostcodeFromAddress(address);
+        }
 
         // Filter by postcode
         const outcode = extractPostcodeOutcode(postcode);
