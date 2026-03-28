@@ -85,9 +85,9 @@ Plans:
 
 Plans:
 - [x] 02.1-01-PLAN.md — Run EPC/CH APIs + fix and import HMO registers + create validation script
-- [ ] 02.1-02-PLAN.md — Download and import Land Registry CCOD dataset
-- [ ] 02.1-03-PLAN.md — Discover and run Apify actors for OpenRent, Rightmove, Zoopla
-- [ ] 02.1-04-PLAN.md — Run deduplication engine and produce CSV exports
+- [x] 02.1-02-PLAN.md — Download and import Land Registry CCOD dataset
+- [x] 02.1-03-PLAN.md — Discover and run Apify actors for OpenRent, Rightmove, Zoopla
+- [x] 02.1-04-PLAN.md — Run deduplication engine and produce CSV exports
 
 **Success Criteria:**
 1. Database populated with real data from EPC Register, Companies House, HMO registers, CCOD, and at least 2 of 3 listing platforms (OpenRent, Rightmove, Zoopla)
@@ -192,4 +192,4 @@ All 28 v1 requirements mapped. No orphans.
 
 ---
 *Roadmap created: 2026-03-28*
-*Last updated: 2026-03-28 after Phase 02.1 planning complete (4 plans created)*
+*Last updated: 2026-03-28 after Phase 02.1 complete (4/4 plans executed)*

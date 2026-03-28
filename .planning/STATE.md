@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: 2
-status: executing
-last_updated: "2026-03-28T17:08:25Z"
+current_plan: 4
+status: phase-complete
+last_updated: "2026-03-28T18:41:49Z"
 progress:
   total_phases: 7
-  completed_phases: 2
-  total_plans: 10
-  completed_plans: 7
+  completed_phases: 3
+  total_plans: 11
+  completed_plans: 8
 ---
 
 # Project State: SJB Property Management Launch
@@ -19,8 +19,8 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-28)
 
 **Core value:** Build a reliable, repeatable pipeline that identifies tired landlords and converts them into long-term property management clients
-**Current focus:** Phase 02.1 — data-gathering-scraping
-**Current Plan:** 2
+**Current focus:** Phase 02.1 complete — ready for Phase 3
+**Current Plan:** 4 (phase complete)
 
 ## Current Milestone
 
@@ -33,7 +33,8 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 |-------|------|--------|----------|
 | 1 | Data Foundation | ● Complete | 100% (3/3 plans) |
 | 2 | Data Sources & Deduplication | ● Complete | 100% (3/3 plans) |
-| 3 | Lead Scoring & CRM | ◐ In Progress | 0% |
+| 2.1 | Data Gathering & Scraping | ● Complete | 100% (4/4 plans) |
+| 3 | Lead Scoring & CRM | ○ Pending | 0% |
 | 4 | Compliance & Outreach Infrastructure | ○ Pending | 0% |
 | 5 | BTL Management Campaign | ○ Pending | 0% |
 | 6 | R2R Pipeline (HMO Only) | ○ Pending | 0% |
@@ -68,6 +69,8 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2026-03-28 | Source priority: CH > EPC > CCOD > HMO > OpenRent > Rightmove | Companies House data most authoritative for company identity |
 | 2026-03-28 | Fuzzy matching scoped to same postcode outcode | Prevents false positives across geographies |
 | 2026-03-28 | Review matches exported as pairs for manual inspection | Simpler to review A-vs-B than grouped clusters |
+| 2026-03-28 | EPC-landlord linking deferred to Phase 3 | EPC properties have ratings but no landlord_id; requires address matching |
+| 2026-03-28 | Review-matches needs Phase 3 filtering | 231K rows from 289 groups too large for manual review |
 
 ## Performance Metrics
 
@@ -80,6 +83,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 02-02 | 4min | 2 | 6 |
 | 02-03 | 4min | 2 | 4 |
 | 02.1-01 | 9min | 1 | 3 |
+| 02.1-04 | 10min | 1 | 6 |
 
 ## Accumulated Context
 
@@ -92,5 +96,5 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 None currently.
 
 ---
-*Last session: 2026-03-28T17:08:25Z*
-*Stopped at: Completed 02.1-01-PLAN.md — EPC/CH/HMO imports done*
+*Last session: 2026-03-28T18:41:49Z*
+*Stopped at: Completed 02.1-04-PLAN.md — Phase 02.1 complete, dedup + exports done*
