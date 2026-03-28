@@ -17,7 +17,7 @@
 **Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Project scaffold, database schema, shared libraries, MCP configuration
+- [x] 01-01-PLAN.md — Project scaffold, database schema, shared libraries, MCP configuration
 - [ ] 01-02-PLAN.md — EPC Register API scraper and Playwright fallback
 - [ ] 01-03-PLAN.md — Companies House API scraper with entity classification
 
