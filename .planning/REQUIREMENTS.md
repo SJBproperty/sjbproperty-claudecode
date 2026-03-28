@@ -17,9 +17,9 @@ Requirements for initial launch. Each maps to roadmap phases.
 ### Data Sources
 
 - [x] **DATA-01**: Land Registry CCOD bulk download — extract all corporate-owned property titles in target postcodes (free CSV)
-- [ ] **DATA-02**: OpenRent scraper — identify self-managing landlords listing in target areas (void periods, listing quality)
-- [ ] **DATA-03**: Council HMO licensing registers — submit FOI requests to Stockport and Manchester councils; import existing dated register as baseline
-- [ ] **DATA-04**: Rightmove/Zoopla scraper — extract listing data for void period analysis and listing quality scoring (noting ToS risk — Apify Actors or manual research as fallback)
+- [x] **DATA-02**: OpenRent scraper — identify self-managing landlords listing in target areas (void periods, listing quality)
+- [x] **DATA-03**: Council HMO licensing registers — submit FOI requests to Stockport and Manchester councils; import existing dated register as baseline
+- [x] **DATA-04**: Rightmove/Zoopla scraper — extract listing data for void period analysis and listing quality scoring (noting ToS risk — Apify Actors or manual research as fallback)
 
 ### Lead Intelligence
 
@@ -100,9 +100,9 @@ Deferred to after first campaign results are in.
 | INFRA-03 | Phase 1 | Complete |
 | INFRA-04 | Phase 1 | Complete |
 | DATA-01 | Phase 2 | Complete |
-| DATA-02 | Phase 2 | Pending |
-| DATA-03 | Phase 2 | Pending |
-| DATA-04 | Phase 2 | Pending |
+| DATA-02 | Phase 2 | Complete |
+| DATA-03 | Phase 2 | Complete |
+| DATA-04 | Phase 2 | Complete |
 | INTEL-01 | Phase 2 | Pending |
 | INTEL-02 | Phase 3 | Pending |
 | INTEL-03 | Phase 3 | Pending |

@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: 2
+current_plan: 3
 status: executing
-last_updated: "2026-03-28T15:33:54.258Z"
+last_updated: "2026-03-28T15:45:00.000Z"
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 6
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # Project State: SJB Property Management Launch
@@ -20,7 +20,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 
 **Core value:** Build a reliable, repeatable pipeline that identifies tired landlords and converts them into long-term property management clients
 **Current focus:** Phase 02 — data-sources-deduplication
-**Current Plan:** 1
+**Current Plan:** 3
 
 ## Current Milestone
 
@@ -32,7 +32,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | Phase | Name | Status | Progress |
 |-------|------|--------|----------|
 | 1 | Data Foundation | ● Complete | 100% (3/3 plans) |
-| 2 | Data Sources & Deduplication | ◐ In Progress | 25% (1/4 plans) |
+| 2 | Data Sources & Deduplication | ◐ In Progress | 50% (2/4 plans) |
 | 3 | Lead Scoring & CRM | ○ Pending | 0% |
 | 4 | Compliance & Outreach Infrastructure | ○ Pending | 0% |
 | 5 | BTL Management Campaign | ○ Pending | 0% |
@@ -60,6 +60,10 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2026-03-28 | Idempotent migrations via try/catch on duplicate column name | Simpler than PRAGMA table_info checks, equally safe |
 | 2026-03-28 | CCOD importer exports function for testability | Injected DB param enables unit testing with temp databases |
 | 2026-03-28 | Transaction batching every 1000 rows | Balances memory usage and write performance for large CSVs |
+| 2026-03-28 | Listing quality score 0-100 weighted: photos(40), desc(30), floorplan(15), EPC(15) | Quantifiable metric for lead scoring in Phase 3 |
+| 2026-03-28 | OpenRent source_ref stores self-managing vs agent-managed | Aids lead prioritisation — self-managing landlords are warmer leads |
+| 2026-03-28 | Rightmove creates no landlord records | Listings show agents not landlords; landlord matching via deduplication |
+| 2026-03-28 | Synchronous HMO parser (csv-parse/sync) | HMO register files typically <10K rows, no need for streaming |
 
 ## Performance Metrics
 
@@ -69,11 +73,12 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 01-02 | 3min | 2 | 3 |
 | 01-03 | 3min | 1 | 2 |
 | 02-01 | 3min | 2 | 7 |
+| 02-02 | 4min | 2 | 6 |
 
 ## Blockers
 
 None currently.
 
 ---
-*Last session: 2026-03-28T15:37:50Z*
-*Stopped at: Completed 02-01-PLAN.md*
+*Last session: 2026-03-28T15:45:00Z*
+*Stopped at: Completed 02-02-PLAN.md*
