@@ -101,8 +101,13 @@ function processOpenRent(filePath, db) {
         const isSelfManaging = (landlordName && !agentName) ||
           landlordName.toLowerCase().includes('private landlord');
 
-        // Filter by postcode
-        const outcode = extractPostcodeOutcode(postcode);
+        // Filter by postcode — handle both full postcodes and outcode-only values
+        let outcode = extractPostcodeOutcode(postcode);
+        if (!outcode) {
+          // Actor may return outcode-only (e.g., "M14" instead of "M14 5RB")
+          const outcodeMatch = postcode.match(/^([A-Z]{1,2}\d[A-Z\d]?)$/i);
+          if (outcodeMatch) outcode = outcodeMatch[1].toUpperCase();
+        }
         if (!outcode || !POSTCODES.includes(outcode)) {
           skipped++;
           continue;

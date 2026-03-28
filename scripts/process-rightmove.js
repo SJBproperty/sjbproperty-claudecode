@@ -97,10 +97,14 @@ function processRightmove(filePath, db) {
     return { imported: 0, skipped: 0 };
   }
 
-  // Prepare statement — no landlord record for Rightmove (agents, not landlords)
+  // Determine source from --source flag or default to 'rightmove'
+  const sourceArg = process.argv.find(a => a.startsWith('--source='));
+  const source = sourceArg ? sourceArg.split('=')[1] : 'rightmove';
+
+  // Prepare statement — no landlord record for Rightmove/Zoopla (agents, not landlords)
   const insertProperty = db.prepare(`
     INSERT OR IGNORE INTO properties (address, postcode, listing_url, void_days, listing_quality_score, source, source_ref, scraped_at)
-    VALUES (?, ?, ?, ?, ?, 'rightmove', 'rightmove', datetime('now'))
+    VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
   `);
 
   let imported = 0;
@@ -119,8 +123,12 @@ function processRightmove(filePath, db) {
         const listingUrl = result.url || result.propertyUrl || '';
         const listingDate = result.listingDate || result.firstPublished || result.publishedDate || null;
 
-        // Filter by postcode
-        const outcode = extractPostcodeOutcode(postcode);
+        // Filter by postcode — handle both full postcodes and outcode-only values
+        let outcode = extractPostcodeOutcode(postcode);
+        if (!outcode) {
+          const outcodeMatch = postcode.match(/^([A-Z]{1,2}\d[A-Z\d]?)$/i);
+          if (outcodeMatch) outcode = outcodeMatch[1].toUpperCase();
+        }
         if (!outcode || !POSTCODES.includes(outcode)) {
           skipped++;
           continue;
@@ -131,7 +139,7 @@ function processRightmove(filePath, db) {
         const qualityScore = calculateListingQualityScore(result);
 
         // Insert property
-        insertProperty.run(address, postcode, listingUrl || null, voidDays, qualityScore);
+        insertProperty.run(address, postcode, listingUrl || null, voidDays, qualityScore, source, source);
         imported++;
       }
     });
@@ -139,7 +147,7 @@ function processRightmove(filePath, db) {
     txn(batch);
   }
 
-  console.log(`Rightmove import: ${imported} properties, ${skipped} skipped`);
+  console.log(`${source} import: ${imported} properties, ${skipped} skipped`);
 
   return { imported, skipped };
 }
