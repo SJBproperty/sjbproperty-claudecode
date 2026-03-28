@@ -11,7 +11,7 @@ Requirements for initial launch. Each maps to roadmap phases.
 
 - [x] **INFRA-01**: SQLite database with landlord, property, and lead entities including entity type classification (Ltd/LLP vs sole trader), source provenance, and UPRN linkage
 - [x] **INFRA-02**: MCP server setup — Apify, Playwright, Companies House MCPs installed and configured for Claude Code orchestration
-- [ ] **INFRA-03**: EPC Register API scraper — extract rental properties in SK, M14, M19, M20, M21, M22 postcodes with landlord names, addresses, EPC ratings, tenure type
+- [x] **INFRA-03**: EPC Register API scraper — extract rental properties in SK, M14, M19, M20, M21, M22 postcodes with landlord names, addresses, EPC ratings, tenure type
 - [ ] **INFRA-04**: Companies House API integration — identify SPV landlords, director details, registered addresses, classify entity type (Ltd/LLP vs sole trader/individual)
 
 ### Data Sources
@@ -97,7 +97,7 @@ Deferred to after first campaign results are in.
 |-------------|-------|--------|
 | INFRA-01 | Phase 1 | Complete |
 | INFRA-02 | Phase 1 | Complete |
-| INFRA-03 | Phase 1 | Pending |
+| INFRA-03 | Phase 1 | Complete |
 | INFRA-04 | Phase 1 | Pending |
 | DATA-01 | Phase 2 | Pending |
 | DATA-02 | Phase 2 | Pending |
