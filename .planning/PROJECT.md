@@ -12,7 +12,10 @@ Build a reliable, repeatable pipeline that identifies landlords who are struggli
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Scrape landlord data from EPC Register (D-G rated rentals, cursor pagination, UPRN dedup) — Validated in Phase 01: Data Foundation
+- [x] Scrape landlord data from Companies House (SPV identification by SIC code, entity classification, director lookup) — Validated in Phase 01: Data Foundation
+- [x] SQLite database with landlord/property entities, source provenance, and entity type classification — Validated in Phase 01: Data Foundation
+- [x] MCP tooling configured (Apify, Companies House) for Claude Code orchestration — Validated in Phase 01: Data Foundation
 
 ### Active
 
@@ -107,4 +110,4 @@ Build a reliable, repeatable pipeline that identifies landlords who are struggli
 | CRM setup required | No existing CRM — need to establish from scratch as part of this project | — Pending |
 
 ---
-*Last updated: 2026-03-28 after initialization*
+*Last updated: 2026-03-28 — Phase 01 (Data Foundation) complete*
