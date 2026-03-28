@@ -14,6 +14,13 @@
 
 **Requirements:** INFRA-01, INFRA-02, INFRA-03, INFRA-04
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Project scaffold, database schema, shared libraries, MCP configuration
+- [ ] 01-02-PLAN.md — EPC Register API scraper and Playwright fallback
+- [ ] 01-03-PLAN.md — Companies House API scraper with entity classification
+
 **Success Criteria:**
 1. SQLite database exists with landlord, property, and lead tables including entity type field (Ltd/LLP vs sole trader) and source provenance
 2. Claude Code can query EPC Register API and return D-G rated rental properties in SK, M14, M19, M20, M21, M22 postcodes with landlord names and addresses
@@ -155,4 +162,4 @@ All 28 v1 requirements mapped. No orphans.
 
 ---
 *Roadmap created: 2026-03-28*
-*Last updated: 2026-03-28 after initialization*
+*Last updated: 2026-03-28 after Phase 1 planning*
