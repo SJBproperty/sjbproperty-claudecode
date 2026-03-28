@@ -46,7 +46,7 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Schema migration, shared libraries, and Land Registry CCOD importer
+- [x] 02-01-PLAN.md — Schema migration, shared libraries, and Land Registry CCOD importer
 - [ ] 02-02-PLAN.md — HMO register parser and OpenRent/Rightmove Apify result processors
 - [ ] 02-03-PLAN.md — Deduplication engine and CSV export pipeline
 
@@ -169,4 +169,4 @@ All 28 v1 requirements mapped. No orphans.
 
 ---
 *Roadmap created: 2026-03-28*
-*Last updated: 2026-03-28 after Phase 2 planning complete (3 plans)*
+*Last updated: 2026-03-28 after 02-01 execution complete (1/3 plans done)*
