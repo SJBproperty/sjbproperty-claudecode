@@ -19,16 +19,16 @@ created: 2026-03-29
 |----------|-------|
 | **Framework** | Node.js built-in assert + better-sqlite3 temp DB |
 | **Config file** | None — follows existing test pattern (temp DB in os.tmpdir()) |
-| **Quick run command** | `node scripts/test-scoring.js` |
-| **Full suite command** | `node scripts/test-scoring.js && node scripts/test-enrichment.js && node scripts/test-hubspot-export.js` |
+| **Quick run command** | `node --test scripts/tests/test-scoring.js` |
+| **Full suite command** | `node --test scripts/tests/test-scoring.js && node --test scripts/tests/test-epc-linking.js && node --test scripts/tests/test-enrichment.js && node --test scripts/tests/test-hubspot-export.js` |
 | **Estimated runtime** | ~5 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `node scripts/test-scoring.js`
-- **After every plan wave:** Run `node scripts/test-scoring.js && node scripts/test-enrichment.js && node scripts/test-hubspot-export.js`
+- **After every task commit:** Run `node --test scripts/tests/test-scoring.js`
+- **After every plan wave:** Run full suite command above
 - **Before `/gsd:verify-work`:** Full suite must be green
 - **Max feedback latency:** 5 seconds
 
@@ -38,23 +38,25 @@ created: 2026-03-29
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 03-01-01 | 01 | 1 | INTEL-02 | unit | `node scripts/test-scoring.js` | ❌ W0 | ⬜ pending |
-| 03-01-02 | 01 | 1 | INTEL-03 | unit | `node scripts/test-scoring.js` | ❌ W0 | ⬜ pending |
-| 03-01-03 | 01 | 1 | INTEL-04 | unit | `node scripts/test-scoring.js` | ❌ W0 | ⬜ pending |
-| 03-02-01 | 02 | 2 | INTEL-05 | integration | `node scripts/test-enrichment.js` | ❌ W0 | ⬜ pending |
-| 03-03-01 | 03 | 3 | CRM-01 | manual-only | Manual — verify in HubSpot UI | n/a | ⬜ pending |
-| 03-03-02 | 03 | 3 | CRM-02 | unit | `node scripts/test-hubspot-export.js` | ❌ W0 | ⬜ pending |
-| 03-03-03 | 03 | 3 | CRM-03 | unit | `node scripts/test-hubspot-export.js` | ❌ W0 | ⬜ pending |
+| 03-01-01 | 01 | 1 | INTEL-02 | unit | `node --test scripts/tests/test-epc-linking.js` | No W0 | pending |
+| 03-01-02 | 01 | 1 | INTEL-02 | unit | `node --test scripts/tests/test-scoring.js` | No W0 | pending |
+| 03-01-03 | 01 | 1 | INTEL-03, INTEL-04 | unit | `node --test scripts/tests/test-scoring.js` | No W0 | pending |
+| 03-02-01 | 02 | 2 | INTEL-05 | integration | `node --test scripts/tests/test-enrichment.js` | No W0 | pending |
+| 03-02-02 | 02 | 2 | INTEL-05 | integration | `node scripts/enrich-contacts.js --phase=ch-only 2>&1 \| tail -5` | No W0 | pending |
+| 03-02-03 | 02 | 2 | INTEL-05 | integration | `node scripts/enrich-contacts.js --phase=ch-only 2>&1 \| tail -5` | n/a | pending |
+| 03-03-01 | 03 | 3 | CRM-02, CRM-03 | unit | `node --test scripts/tests/test-hubspot-export.js` | No W0 | pending |
+| 03-03-02 | 03 | 3 | CRM-01 | manual-only | Manual — verify in HubSpot UI | n/a | pending |
 
-*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+*Status: pending / green / red / flaky*
 
 ---
 
 ## Wave 0 Requirements
 
-- [ ] `scripts/test-scoring.js` — stubs for INTEL-02, INTEL-03, INTEL-04 (scoring, BTL classification, R2R classification)
-- [ ] `scripts/test-enrichment.js` — stubs for INTEL-05 (mock API calls for Snov.io/CH enrichment)
-- [ ] `scripts/test-hubspot-export.js` — stubs for CRM-02, CRM-03 (CSV format, follow-up date calculation)
+- [ ] `scripts/tests/test-epc-linking.js` — stubs for EPC-landlord address matching (postcode + Fuse.js fuzzy match)
+- [ ] `scripts/tests/test-scoring.js` — stubs for INTEL-02, INTEL-03, INTEL-04 (scoring, BTL classification, R2R classification)
+- [ ] `scripts/tests/test-enrichment.js` — stubs for INTEL-05 (mock API calls for Snov.io/CH enrichment)
+- [ ] `scripts/tests/test-hubspot-export.js` — stubs for CRM-02, CRM-03 (CSV format, follow-up date calculation)
 - [ ] `scripts/lib/scoring.js` — pure scoring functions extracted for testability
 
 *Existing test infrastructure (scripts/tests/) available — extend with new test files.*
@@ -65,7 +67,7 @@ created: 2026-03-29
 
 | Behavior | Requirement | Why Manual | Test Instructions |
 |----------|-------------|------------|-------------------|
-| HubSpot pipeline setup | CRM-01 | Requires HubSpot UI interaction | 1. Log into HubSpot 2. Verify pipeline stages: New Lead → Contacted → Follow Up → Consultation Booked → Proposal Sent → Signed → Onboarding 3. Verify custom properties exist: tired_landlord_score, btl_suitable, r2r_suitable, entity_type, property_count, data_sources, epc_rating, void_days |
+| HubSpot pipeline setup | CRM-01 | Requires HubSpot UI interaction | 1. Log into HubSpot 2. Verify pipeline stages: New Lead, Contacted, Follow Up, Consultation Booked, Proposal Sent, Signed, Onboarding 3. Verify custom properties exist: tired_landlord_score, btl_suitable, r2r_suitable, entity_type, property_count, data_sources, epc_rating, void_days |
 
 ---
 
