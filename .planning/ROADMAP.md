@@ -104,7 +104,7 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Tired landlord scoring algorithm + BTL/R2R classification
+- [x] 03-01-PLAN.md — Tired landlord scoring algorithm + BTL/R2R classification
 - [ ] 03-02-PLAN.md — Contact enrichment via Companies House officers + Snov.io API
 - [ ] 03-03-PLAN.md — HubSpot CSV export + CRM pipeline setup
 

@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: Not started
-status: planning
-last_updated: "2026-03-29T04:48:47.990Z"
+current_plan: 2
+status: executing
+last_updated: "2026-03-29T12:23:02Z"
 progress:
   total_phases: 7
   completed_phases: 3
-  total_plans: 10
-  completed_plans: 10
+  total_plans: 13
+  completed_plans: 11
 ---
 
 # Project State: SJB Property Management Launch
@@ -19,13 +19,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-28)
 
 **Core value:** Build a reliable, repeatable pipeline that identifies tired landlords and converts them into long-term property management clients
-**Current focus:** Phase 02.1 complete — ready for Phase 3
-**Current Plan:** Not started
+**Current focus:** Phase 03 — lead-scoring-crm
+**Current Plan:** 1
 
 ## Current Milestone
 
 **Milestone 1:** Landlord Lead Generation Pipeline (v1)
-**Status:** Ready to plan
+**Status:** Executing Phase 03
 
 ## Phase Status
 
@@ -34,7 +34,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 1 | Data Foundation | ● Complete | 100% (3/3 plans) |
 | 2 | Data Sources & Deduplication | ● Complete | 100% (3/3 plans) |
 | 2.1 | Data Gathering & Scraping | ● Complete | 100% (4/4 plans) |
-| 3 | Lead Scoring & CRM | ○ Pending | 0% |
+| 3 | Lead Scoring & CRM | ◐ In Progress | 33% (1/3 plans) |
 | 4 | Compliance & Outreach Infrastructure | ○ Pending | 0% |
 | 5 | BTL Management Campaign | ○ Pending | 0% |
 | 6 | R2R Pipeline (HMO Only) | ○ Pending | 0% |
@@ -71,6 +71,10 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2026-03-28 | Review matches exported as pairs for manual inspection | Simpler to review A-vs-B than grouped clusters |
 | 2026-03-28 | EPC-landlord linking deferred to Phase 3 | EPC properties have ratings but no landlord_id; requires address matching |
 | 2026-03-28 | Review-matches needs Phase 3 filtering | 231K rows from 289 groups too large for manual review |
+| 2026-03-29 | Fuse.js threshold 0.4 for address matching | Looser than 0.3 name matching due to address variation (flats, abbreviations) |
+| 2026-03-29 | Score normalises to available signals only | Single strong signal can score 100; intentional per CONTEXT.md |
+| 2026-03-29 | Portfolio size 9+ gets 0 points | Large portfolio = professional operator, not a tired landlord |
+| 2026-03-29 | Address normalisation expands abbreviations | Expanding Rd->Road gives Fuse.js more characters for better matching |
 
 ## Performance Metrics
 
@@ -84,6 +88,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 02-03 | 4min | 2 | 4 |
 | 02.1-01 | 9min | 1 | 3 |
 | 02.1-04 | 10min | 1 | 6 |
+| 03-01 | 6min | 3 | 6 |
 
 ## Accumulated Context
 
@@ -96,5 +101,5 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 None currently.
 
 ---
-*Last session: 2026-03-28T18:41:49Z*
-*Stopped at: Completed 02.1-04-PLAN.md — Phase 02.1 complete, dedup + exports done*
+*Last session: 2026-03-29T12:23:02Z*
+*Stopped at: Completed 03-01-PLAN.md — scoring + EPC linking done, 1,577 leads at 50+*

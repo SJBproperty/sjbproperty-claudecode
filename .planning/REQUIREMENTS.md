@@ -24,9 +24,9 @@ Requirements for initial launch. Each maps to roadmap phases.
 ### Lead Intelligence
 
 - [x] **INTEL-01**: Cross-source deduplication — match landlord records across all 5+ data sources using name fuzzy matching, address normalisation, UPRN, and company number
-- [ ] **INTEL-02**: Tired landlord scoring algorithm (0-100) — weighted signals: void periods (30+ days), poor listing quality, compliance gaps (EPC rating, expired certificates), multi-property ownership
-- [ ] **INTEL-03**: BTL Management lead classification — score for fee-based management suitability: self-managing landlords with 1-5 properties showing overwhelm signals (compliance stress, long voids, poor listings)
-- [ ] **INTEL-04**: R2R/Guaranteed Rent lead classification — filter EXCLUSIVELY on HMO landlords: licensed HMO properties where landlord would benefit from fixed income, zero-hassle commercial lease. R2R only works with HMOs.
+- [x] **INTEL-02**: Tired landlord scoring algorithm (0-100) — weighted signals: void periods (30+ days), poor listing quality, compliance gaps (EPC rating, expired certificates), multi-property ownership
+- [x] **INTEL-03**: BTL Management lead classification — score for fee-based management suitability: self-managing landlords with 1-5 properties showing overwhelm signals (compliance stress, long voids, poor listings)
+- [x] **INTEL-04**: R2R/Guaranteed Rent lead classification — filter EXCLUSIVELY on HMO landlords: licensed HMO properties where landlord would benefit from fixed income, zero-hassle commercial lease. R2R only works with HMOs.
 - [ ] **INTEL-05**: Contact enrichment — find phone numbers and email addresses from property/company data using 192.com, LinkedIn director lookups, Companies House registered addresses
 
 ### CRM & Pipeline
@@ -104,9 +104,9 @@ Deferred to after first campaign results are in.
 | DATA-03 | Phase 2 | Complete |
 | DATA-04 | Phase 2 | Complete |
 | INTEL-01 | Phase 2 | Complete |
-| INTEL-02 | Phase 3 | Pending |
-| INTEL-03 | Phase 3 | Pending |
-| INTEL-04 | Phase 3 | Pending |
+| INTEL-02 | Phase 3 | Complete |
+| INTEL-03 | Phase 3 | Complete |
+| INTEL-04 | Phase 3 | Complete |
 | INTEL-05 | Phase 3 | Pending |
 | CRM-01 | Phase 3 | Pending |
 | CRM-02 | Phase 3 | Pending |
