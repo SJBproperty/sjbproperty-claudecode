@@ -101,6 +101,13 @@ Plans:
 
 **Requirements:** INTEL-02, INTEL-03, INTEL-04, INTEL-05, CRM-01, CRM-02, CRM-03
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Tired landlord scoring algorithm + BTL/R2R classification
+- [ ] 03-02-PLAN.md — Contact enrichment via Companies House officers + Snov.io API
+- [ ] 03-03-PLAN.md — HubSpot CSV export + CRM pipeline setup
+
 **Success Criteria:**
 1. Every landlord has a tired landlord score (0-100) based on weighted signals: void periods, EPC rating (D-G), compliance gaps, listing quality, portfolio size
 2. Leads classified as BTL-suitable (self-managing, 1-5 properties, overwhelm signals) or R2R-suitable (HMO landlords ONLY — licensed HMO properties)
@@ -183,7 +190,8 @@ All 28 v1 requirements mapped. No orphans.
 |-------|-------------|-------|
 | 1 | INFRA-01, INFRA-02, INFRA-03, INFRA-04 | 4 |
 | 2 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | 5 |
-| 02.1 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | Complete    | 2026-03-29 | 3 | INTEL-02, INTEL-03, INTEL-04, INTEL-05, CRM-01, CRM-02, CRM-03 | 7 |
+| 02.1 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | 5 |
+| 3 | INTEL-02, INTEL-03, INTEL-04, INTEL-05, CRM-01, CRM-02, CRM-03 | 7 |
 | 4 | COMP-01, COMP-02, COMP-03, COMP-04 | 4 |
 | 5 | OUT-BTL-01, OUT-BTL-02, OUT-BTL-03, OUT-BTL-04 | 4 |
 | 6 | OUT-R2R-01, OUT-R2R-02, OUT-R2R-03, OUT-R2R-04 | 4 |
@@ -191,4 +199,4 @@ All 28 v1 requirements mapped. No orphans.
 
 ---
 *Roadmap created: 2026-03-28*
-*Last updated: 2026-03-28 after Phase 02.1 complete (4/4 plans executed)*
+*Last updated: 2026-03-29 after Phase 3 planning (3 plans created)*
