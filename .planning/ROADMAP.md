@@ -81,7 +81,7 @@ Plans:
 
 **Depends on:** Phase 2
 
-**Plans:** 4 plans
+**Plans:** 4/4 plans complete
 
 Plans:
 - [x] 02.1-01-PLAN.md — Run EPC/CH APIs + fix and import HMO registers + create validation script
@@ -183,8 +183,7 @@ All 28 v1 requirements mapped. No orphans.
 |-------|-------------|-------|
 | 1 | INFRA-01, INFRA-02, INFRA-03, INFRA-04 | 4 |
 | 2 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | 5 |
-| 02.1 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | 5 (execution of Phase 2 scripts) |
-| 3 | INTEL-02, INTEL-03, INTEL-04, INTEL-05, CRM-01, CRM-02, CRM-03 | 7 |
+| 02.1 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | Complete    | 2026-03-29 | 3 | INTEL-02, INTEL-03, INTEL-04, INTEL-05, CRM-01, CRM-02, CRM-03 | 7 |
 | 4 | COMP-01, COMP-02, COMP-03, COMP-04 | 4 |
 | 5 | OUT-BTL-01, OUT-BTL-02, OUT-BTL-03, OUT-BTL-04 | 4 |
 | 6 | OUT-R2R-01, OUT-R2R-02, OUT-R2R-03, OUT-R2R-04 | 4 |
