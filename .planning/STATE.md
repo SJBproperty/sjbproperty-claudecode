@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: 2
+current_plan: 3
 status: executing
-last_updated: "2026-03-29T12:23:02Z"
+last_updated: "2026-03-29T12:32:00Z"
 progress:
   total_phases: 7
   completed_phases: 3
   total_plans: 13
-  completed_plans: 11
+  completed_plans: 12
 ---
 
 # Project State: SJB Property Management Launch
@@ -34,7 +34,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 1 | Data Foundation | ● Complete | 100% (3/3 plans) |
 | 2 | Data Sources & Deduplication | ● Complete | 100% (3/3 plans) |
 | 2.1 | Data Gathering & Scraping | ● Complete | 100% (4/4 plans) |
-| 3 | Lead Scoring & CRM | ◐ In Progress | 33% (1/3 plans) |
+| 3 | Lead Scoring & CRM | ◐ In Progress | 67% (2/3 plans) |
 | 4 | Compliance & Outreach Infrastructure | ○ Pending | 0% |
 | 5 | BTL Management Campaign | ○ Pending | 0% |
 | 6 | R2R Pipeline (HMO Only) | ○ Pending | 0% |
@@ -75,6 +75,9 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2026-03-29 | Score normalises to available signals only | Single strong signal can score 100; intentional per CONTEXT.md |
 | 2026-03-29 | Portfolio size 9+ gets 0 points | Large portfolio = professional operator, not a tired landlord |
 | 2026-03-29 | Address normalisation expands abbreviations | Expanding Rd->Road gives Fuse.js more characters for better matching |
+| 2026-03-29 | All enrichment tiers in single file with --tier flag | Selective execution avoids running expensive tiers unnecessarily |
+| 2026-03-29 | Property address as mailing fallback | 97.5% coverage; no-email leads are PRIME direct mail candidates |
+| 2026-03-29 | Snov.io/Apify/Firecrawl skip gracefully when unconfigured | Script never fails on missing credentials |
 
 ## Performance Metrics
 
@@ -89,6 +92,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 02.1-01 | 9min | 1 | 3 |
 | 02.1-04 | 10min | 1 | 6 |
 | 03-01 | 6min | 3 | 6 |
+| 03-02 | 5min | 4 | 3 |
 
 ## Accumulated Context
 
@@ -101,5 +105,5 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 None currently.
 
 ---
-*Last session: 2026-03-29T12:23:02Z*
-*Stopped at: Completed 03-01-PLAN.md — scoring + EPC linking done, 1,577 leads at 50+*
+*Last session: 2026-03-29T12:32:00Z*
+*Stopped at: Completed 03-02-PLAN.md — enrichment waterfall done, 1,537/1,577 leads with mailing addresses, all flagged direct-mail-candidate*
