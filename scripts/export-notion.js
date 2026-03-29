@@ -82,7 +82,6 @@ function buildNotionProperties(landlord) {
     'Phone': { phone_number: landlord.phone || null },
     'Next Follow-up': { date: { start: followUpDate } },
     'Company': { rich_text: [{ text: { content: landlord.company_number || '' } }] },
-    'Notes': { rich_text: [{ text: { content: buildNotes(landlord, leadType, worst) } }] },
     'Score': { number: landlord.tired_score },
     'Lead Type': { select: { name: leadType } },
     'BTL Suitable': { checkbox: Boolean(landlord.btl_suitable) },
@@ -131,43 +130,67 @@ function queryLeads(db, minScore) {
 // ============================================================
 
 /**
- * POST a single page to the Notion API.
- * @param {object} pageData - Full Notion page creation payload
- * @returns {Promise<object>} API response
+ * Generic Notion API request helper.
  */
-function createNotionPage(pageData) {
+function notionRequest(method, path, body) {
   return new Promise((resolve, reject) => {
-    const body = JSON.stringify(pageData);
-    const req = https.request({
-      hostname: 'api.notion.com',
-      path: '/v1/pages',
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${NOTION_API_KEY}`,
-        'Notion-Version': '2022-06-28',
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(body),
-      },
-    }, (res) => {
+    const bodyStr = body ? JSON.stringify(body) : '';
+    const headers = {
+      'Authorization': `Bearer ${NOTION_API_KEY}`,
+      'Notion-Version': '2022-06-28',
+      'Content-Type': 'application/json',
+    };
+    if (bodyStr) headers['Content-Length'] = Buffer.byteLength(bodyStr);
+    const req = https.request({ hostname: 'api.notion.com', path, method, headers }, (res) => {
       let data = '';
       res.on('data', chunk => { data += chunk; });
       res.on('end', () => {
         try {
           const parsed = JSON.parse(data);
-          if (res.statusCode >= 200 && res.statusCode < 300) {
-            resolve(parsed);
-          } else {
-            reject(new Error(`Notion API ${res.statusCode}: ${parsed.message || data}`));
-          }
-        } catch (e) {
-          reject(new Error(`Failed to parse Notion response: ${data}`));
-        }
+          if (res.statusCode >= 200 && res.statusCode < 300) resolve(parsed);
+          else reject(new Error(`Notion API ${res.statusCode}: ${parsed.message || data}`));
+        } catch (e) { reject(new Error(`Failed to parse Notion response: ${data}`)); }
       });
     });
     req.on('error', reject);
-    req.write(body);
+    if (bodyStr) req.write(bodyStr);
     req.end();
   });
+}
+
+/**
+ * Fetch all existing lead names from the Notion database.
+ * Paginates through all pages to build a Set of names.
+ * @returns {Promise<Set<string>>}
+ */
+async function fetchExistingLeadNames() {
+  const names = new Set();
+  let startCursor;
+  let hasMore = true;
+  while (hasMore) {
+    const body = { page_size: 100 };
+    if (startCursor) body.start_cursor = startCursor;
+    const result = await notionRequest('POST', `/v1/databases/${NOTION_DATABASE_ID}/query`, body);
+    for (const page of result.results) {
+      const titleProp = page.properties['Lead'];
+      if (titleProp && titleProp.title && titleProp.title.length > 0) {
+        names.add(titleProp.title[0].plain_text);
+      }
+    }
+    hasMore = result.has_more;
+    startCursor = result.next_cursor;
+    if (hasMore) await sleep(350);
+  }
+  return names;
+}
+
+/**
+ * POST a single page to the Notion API.
+ * @param {object} pageData - Full Notion page creation payload
+ * @returns {Promise<object>} API response
+ */
+function createNotionPage(pageData) {
+  return notionRequest('POST', '/v1/pages', pageData);
 }
 
 /**
@@ -268,24 +291,40 @@ async function exportToNotion(db, options = {}) {
     return { total: leads.length, success: 0, failed: leads.length, dryRunFile: null, csvBackupFile };
   }
 
+  // Deduplicate: fetch existing lead names from Notion and skip them
+  console.log('Checking for existing leads in Notion...');
+  const existingNames = await fetchExistingLeadNames();
+  console.log(`Found ${existingNames.size} existing leads in Notion`);
+
   let success = 0;
   let failed = 0;
+  let skipped = 0;
   const errors = [];
 
   for (let i = 0; i < pageObjects.length; i++) {
+    const leadName = leads[i].name;
+
+    // Skip if already exists in Notion
+    if (existingNames.has(leadName)) {
+      skipped++;
+      if ((i + 1) % batchSize === 0 || i === pageObjects.length - 1) {
+        console.log(`Progress ${i + 1}/${pageObjects.length} (${success} pushed, ${skipped} skipped)...`);
+      }
+      continue;
+    }
+
     try {
       await createNotionPage(pageObjects[i]);
       success++;
     } catch (err) {
       failed++;
-      const leadName = leads[i].name;
       console.error(`Failed to push "${leadName}": ${err.message}`);
       errors.push({ name: leadName, error: err.message });
     }
 
     // Progress logging
     if ((i + 1) % batchSize === 0 || i === pageObjects.length - 1) {
-      console.log(`Pushed ${i + 1}/${pageObjects.length} leads to Notion...`);
+      console.log(`Progress ${i + 1}/${pageObjects.length} (${success} pushed, ${skipped} skipped)...`);
     }
 
     // Rate limiting: 3 requests/second = 333ms between requests
@@ -294,7 +333,7 @@ async function exportToNotion(db, options = {}) {
     }
   }
 
-  console.log(`\nNotion export complete: ${success} success, ${failed} failed out of ${leads.length} total`);
+  console.log(`\nNotion export complete: ${success} new, ${skipped} skipped (already exist), ${failed} failed out of ${leads.length} total`);
   if (errors.length > 0) {
     console.log('Errors:');
     errors.forEach(e => console.log(`  - ${e.name}: ${e.error}`));
@@ -303,6 +342,7 @@ async function exportToNotion(db, options = {}) {
   return {
     total: leads.length,
     success,
+    skipped,
     failed,
     errors,
     dryRunFile: null,

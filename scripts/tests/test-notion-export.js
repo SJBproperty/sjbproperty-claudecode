@@ -186,7 +186,6 @@ describe('buildNotionProperties', () => {
     assert.equal(props['Company'].rich_text[0].text.content, '12345678');
     assert.equal(props['LinkedIn'].url, 'https://linkedin.com/company/acme');
     assert.equal(props['Next Follow-up'].date.start, calculateFollowUpDate());
-    assert.ok(props['Notes'].rich_text[0].text.content.includes('Score: 75/100'));
   });
 
   it('handles null/missing optional fields gracefully', () => {
