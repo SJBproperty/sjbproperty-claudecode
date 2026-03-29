@@ -102,6 +102,7 @@ function insertProperty(db, opts) {
 const {
   queryLeads,
   buildNotionProperties,
+  buildNotes,
   deriveLeadType,
   worstEPC,
   calculateFollowUpDate,
@@ -168,9 +169,10 @@ describe('buildNotionProperties', () => {
 
     const props = buildNotionProperties(landlord);
 
-    assert.equal(props['Name'].title[0].text.content, 'ACME PROPERTY LTD');
+    assert.equal(props['Lead'].title[0].text.content, 'ACME PROPERTY LTD');
     assert.equal(props['Score'].number, 75);
-    assert.equal(props['Pipeline Stage'].select.name, 'New Lead');
+    assert.equal(props['Status'].status.name, 'New');
+    assert.equal(props['Source'].select.name, 'Cold outreach');
     assert.equal(props['Lead Type'].select.name, 'BTL');
     assert.equal(props['BTL Suitable'].checkbox, true);
     assert.equal(props['R2R Suitable'].checkbox, false);
@@ -180,9 +182,11 @@ describe('buildNotionProperties', () => {
     assert.equal(props['Void Days'].number, 45);
     assert.equal(props['Email'].email, 'info@acme.co.uk');
     assert.equal(props['Phone'].phone_number, '07700900000');
-    assert.equal(props['Director Names'].rich_text[0].text.content, 'John Smith, Jane Doe');
-    assert.equal(props['Company Number'].rich_text[0].text.content, '12345678');
+    assert.equal(props['Contact Name'].rich_text[0].text.content, 'John Smith, Jane Doe');
+    assert.equal(props['Company'].rich_text[0].text.content, '12345678');
     assert.equal(props['LinkedIn'].url, 'https://linkedin.com/company/acme');
+    assert.equal(props['Next Follow-up'].date.start, calculateFollowUpDate());
+    assert.ok(props['Notes'].rich_text[0].text.content.includes('Score: 75/100'));
   });
 
   it('handles null/missing optional fields gracefully', () => {

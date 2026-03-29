@@ -53,37 +53,50 @@ function calculateFollowUpDate() {
  * @param {object} landlord - Row from queryLeads
  * @returns {object} Notion properties object
  */
+/**
+ * Build a notes string summarising key lead data for the Notes field.
+ */
+function buildNotes(landlord, leadType, worstEpc) {
+  const parts = [];
+  parts.push(`Score: ${landlord.tired_score}/100`);
+  parts.push(`Type: ${leadType}`);
+  if (worstEpc) parts.push(`Worst EPC: ${worstEpc}`);
+  if (landlord.property_count) parts.push(`Properties: ${landlord.property_count}`);
+  if (landlord.max_void_days) parts.push(`Max void: ${landlord.max_void_days}d`);
+  if (landlord.mailing_address) parts.push(`Address: ${landlord.mailing_address}`);
+  if (landlord.enrichment_source) parts.push(`Source: ${landlord.enrichment_source}`);
+  return parts.join(' | ');
+}
+
 function buildNotionProperties(landlord) {
   const leadType = deriveLeadType(landlord.btl_suitable, landlord.r2r_suitable);
   const worst = worstEPC(landlord.epc_ratings);
   const followUpDate = calculateFollowUpDate();
 
   const props = {
-    'Name': { title: [{ text: { content: landlord.name } }] },
+    'Lead': { title: [{ text: { content: landlord.name } }] },
+    'Status': { status: { name: 'New' } },
+    'Source': { select: { name: 'Cold outreach' } },
+    'Contact Name': { rich_text: [{ text: { content: landlord.director_names || '' } }] },
+    'Email': { email: landlord.email || null },
+    'Phone': { phone_number: landlord.phone || null },
+    'Next Follow-up': { date: { start: followUpDate } },
+    'Company': { rich_text: [{ text: { content: landlord.company_number || '' } }] },
+    'Notes': { rich_text: [{ text: { content: buildNotes(landlord, leadType, worst) } }] },
     'Score': { number: landlord.tired_score },
-    'Pipeline Stage': { select: { name: 'New Lead' } },
     'Lead Type': { select: { name: leadType } },
     'BTL Suitable': { checkbox: Boolean(landlord.btl_suitable) },
     'R2R Suitable': { checkbox: Boolean(landlord.r2r_suitable) },
     'Entity Type': { select: { name: landlord.entity_type || 'unknown' } },
     'Property Count': { number: landlord.property_count || 0 },
     'Void Days': { number: landlord.max_void_days || 0 },
-    'Email': { email: landlord.email || null },
-    'Phone': { phone_number: landlord.phone || null },
     'Mailing Address': { rich_text: [{ text: { content: landlord.mailing_address || '' } }] },
     'Data Sources': { rich_text: [{ text: { content: landlord.enrichment_source || landlord.source || '' } }] },
-    'Director Names': { rich_text: [{ text: { content: landlord.director_names || '' } }] },
-    'Follow Up Date': { date: { start: followUpDate } },
-    'Company Number': { rich_text: [{ text: { content: landlord.company_number || '' } }] },
     'LinkedIn': { url: landlord.linkedin_url || null },
   };
 
-  // Only add EPC Rating if we have one (Notion rejects null select)
-  if (worst) {
-    props['EPC Rating'] = { select: { name: worst } };
-  } else {
-    props['EPC Rating'] = { select: { name: 'N/A' } };
-  }
+  // EPC Rating as select (auto-created by Notion API)
+  props['EPC Rating'] = { select: { name: worst || 'N/A' } };
 
   return props;
 }
@@ -326,6 +339,7 @@ module.exports = {
   exportToNotion,
   queryLeads,
   buildNotionProperties,
+  buildNotes,
   deriveLeadType,
   worstEPC,
   calculateFollowUpDate,
