@@ -33,32 +33,39 @@ Score all landlords 0-100 for "tiredness," classify as BTL-suitable and/or R2R-s
 - **BTL suitability = multiple tired signals stacking** — Any 2+ of: long voids, poor EPC, low listing quality, self-managing, no agent. More stacking signals = more likely to need management help
 - **Tired score 50+ and not exclusively HMO = BTL-suitable by default** — The tired score itself captures the overwhelm signals
 
-### Contact enrichment
-- **Tool priority:** Snov.io first (CSV import already prepared), then Vibe Prospecting MCP for additional enrichment
-- **Enrichment scope:** 50+ scored leads first, expand to lower-scored if budget allows. Sam will add more Snov.io credits rather than wait a billing cycle
-- **Batch by score tier** — Highest-scored leads enriched first to maximise value per credit
-- **Companies House directors:** Auto-extract registered office addresses for direct mail. Flag addresses that look like accountant/service addresses (containing 'Accountants', 'Services Ltd', etc.) — only use residential-looking addresses
-- **LinkedIn:** Automated profile discovery via Apify/Firecrawl actors matching landlord names + locations
-- **No-contact leads = PRIME direct mail candidates** — Lack of digital presence may signal older landlord without LinkedIn etc. These are prime approach candidates for direct mail to property address or registered office. Do NOT deprioritise
+### Contact enrichment — tiered waterfall
+
+- **Tier 0a: CH filing email extraction (free)** — Scrape confirmation statements/annual returns for email addresses listed in filings. First pass before burning any paid credits
+- **Tier 0b: OpenRent rescrape for contact fields** — Rescrape OpenRent listings via Apify targeting landlord contact details (email, phone) instead of listing quality. Free data, run before paid tools
+- **Tier 1: Snov.io (50 free trial credits, Stockport only)** — Top 50 Stockport leads by score. Company name + director name (from CH officer lookup). Stop when credits exhausted. Free trial only, no paid subscription
+- **Tier 2: Apify email finder actors** — Next batch of leads. LinkedIn/web scraping for director names. Pay-per-result
+- **Tier 3: Firecrawl crawl** — Crawl company websites (if found), LinkedIn pages. Catches embedded emails missed by API tools
+- **Tier 4: No email found → flag for Stannp direct mail** — These go straight to the letter channel. Property address or CH registered office. PRIME candidates — older landlords without digital presence
+- **Snov.io as final mop-up** — After tiers 0-3, any remaining unfound emails get one last Snov.io attempt if credits remain
+- **Companies House directors:** Auto-extract registered office addresses for direct mail. Flag service addresses (accountants, formations agents, etc.) — only use residential-looking addresses
+- **No-contact leads = PRIME direct mail candidates** — Lack of digital presence signals older/less tech-savvy landlord. Do NOT deprioritise. These are prime approach candidates for letters
 
 ### Enrichment schema
+
 - Add columns directly to landlords table: email, phone, linkedin_url, mailing_address, enrichment_source, enrichment_date
 - Simple approach — everything in one place, no separate contacts table
 
-### HubSpot CRM
-- **Import method:** One-time CSV import of scored+enriched leads. Re-run export when data refreshes
-- **Pipeline:** Single pipeline with BTL/R2R custom property tag for filtering. Separate pipelines not needed since R2R is a subset
-- **Stages:** New Lead → Contacted → Follow Up → Consultation Booked → Proposal Sent → Signed → Onboarding (added Follow Up stage between Contacted and Consultation Booked)
-- **Follow-up automation:** Time-based follow-up tasks coded in the export/import script (not HubSpot workflows, which are limited on free tier). E.g. 'Follow up in 3 days' after Contacted, '7 days' after Proposal Sent
-- **Custom properties to import:** tired_landlord_score, btl_suitable, r2r_suitable, entity_type, property_count, data_sources, epc_rating, void_days
+### Notion CRM (replaces HubSpot)
+- **Tool:** Notion free tier via API (unlimited pages/database rows). MCP server configured: `@notionhq/notion-mcp-server` with API token in .env
+- **Import method:** Script pushes scored+enriched leads to Notion database via API. Re-run when data refreshes
+- **Pipeline:** Single Notion database with Board view grouped by pipeline stage. BTL/R2R as a select property for filtering
+- **Stages:** New Lead → Contacted → Follow Up → Consultation Booked → Proposal Sent → Signed → Onboarding
+- **Follow-up automation:** Follow-up date property calculated by script (3 days after creation). n8n integration deferred to Phase 4/5 for automated reminders
+- **Properties to push:** tired_landlord_score, btl_suitable, r2r_suitable, entity_type, property_count, data_sources, epc_rating, void_days, email, phone, mailing_address, lead_type
 
 ### Claude's Discretion
 - Exact weight percentages within the ranges specified (e.g. 35% vs 38% for voids)
 - Score formula implementation (linear vs stepped vs logarithmic)
 - How to handle landlords with no void data (OpenRent/Rightmove data is sparse)
-- HubSpot CSV format specifics and custom property field types
-- Vibe Prospecting MCP configuration and integration
+- Notion database schema specifics and property types
+- Apify email finder actor selection
 - LinkedIn Apify actor selection
+- Firecrawl crawl configuration for company websites
 - Service address detection heuristics for Companies House addresses
 
 </decisions>
