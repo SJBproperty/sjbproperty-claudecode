@@ -36,7 +36,9 @@ function scoreAllLandlords(db) {
       COUNT(DISTINCT p.id) as property_count,
       CASE WHEN COUNT(DISTINCT p.id) > 0
         AND COUNT(DISTINCT p.id) = COUNT(DISTINCT CASE WHEN p.hmo_licence_number IS NOT NULL THEN p.id END)
-        THEN 1 ELSE 0 END as has_only_hmo
+        THEN 1 ELSE 0 END as has_only_hmo,
+      CASE WHEN COUNT(DISTINCT CASE WHEN p.hmo_licence_number IS NOT NULL THEN p.id END) > 0
+        THEN 1 ELSE 0 END as has_any_hmo_property
     FROM landlords l
     LEFT JOIN properties p ON p.landlord_id = l.id
     WHERE (l.match_group_id IS NULL OR l.is_primary_record = 1)
@@ -68,9 +70,11 @@ function scoreAllLandlords(db) {
       property_count: l.property_count,
     });
 
-    const hasHMOLicence = l.hmo_licence_number != null && l.hmo_licence_number !== '';
+    const isHMO = (l.hmo_licence_number != null && l.hmo_licence_number !== '')
+      || l.source === 'hmo-register'
+      || l.has_any_hmo_property === 1;
     const btl = classifyBTL(score, l.has_only_hmo === 1);
-    const r2r = classifyR2R(hasHMOLicence);
+    const r2r = classifyR2R(isHMO);
 
     updates.push({
       score,
