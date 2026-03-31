@@ -51,9 +51,9 @@ Requirements for initial launch. Each maps to roadmap phases.
 
 ### Compliance & Legal
 
-- [ ] **COMP-01**: GDPR Legitimate Interest Assessment (LIA) documentation for B2B landlord marketing
+- [x] **COMP-01**: GDPR Legitimate Interest Assessment (LIA) documentation for B2B landlord marketing
 - [ ] **COMP-02**: PECR compliance enforcement — entity type gate: email outreach ONLY to Ltd/LLP landlords; sole traders receive direct mail/phone only
-- [ ] **COMP-03**: Privacy notice and data retention policy for landlord lead data
+- [x] **COMP-03**: Privacy notice and data retention policy for landlord lead data
 - [ ] **COMP-04**: Suppression list — opt-out tracking to prevent re-contacting landlords who decline
 
 ## v2 Requirements
@@ -119,9 +119,9 @@ Deferred to after first campaign results are in.
 | OUT-R2R-02 | Phase 6 | Pending |
 | OUT-R2R-03 | Phase 6 | Pending |
 | OUT-R2R-04 | Phase 6 | Pending |
-| COMP-01 | Phase 4 | Pending |
+| COMP-01 | Phase 4 | Complete |
 | COMP-02 | Phase 4 | Pending |
-| COMP-03 | Phase 4 | Pending |
+| COMP-03 | Phase 4 | Complete |
 | COMP-04 | Phase 4 | Pending |
 
 **Coverage:**

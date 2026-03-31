@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: 3
+current_plan: 2
 status: executing
-last_updated: "2026-03-29T13:15:00Z"
+last_updated: "2026-03-31T15:57:37Z"
 progress:
   total_phases: 7
   completed_phases: 4
-  total_plans: 13
-  completed_plans: 13
+  total_plans: 15
+  completed_plans: 14
 ---
 
 # Project State: SJB Property Management Launch
@@ -19,13 +19,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-28)
 
 **Core value:** Build a reliable, repeatable pipeline that identifies tired landlords and converts them into long-term property management clients
-**Current focus:** Phase 03 — lead-scoring-crm
-**Current Plan:** 1
+**Current focus:** Phase 04 — compliance-outreach-infrastructure
+**Current Plan:** 2
 
 ## Current Milestone
 
 **Milestone 1:** Landlord Lead Generation Pipeline (v1)
-**Status:** Executing Phase 03
+**Status:** Executing Phase 04
 
 ## Phase Status
 
@@ -35,7 +35,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2 | Data Sources & Deduplication | ● Complete | 100% (3/3 plans) |
 | 2.1 | Data Gathering & Scraping | ● Complete | 100% (4/4 plans) |
 | 3 | Lead Scoring & CRM | ● Complete | 100% (3/3 plans) |
-| 4 | Compliance & Outreach Infrastructure | ○ Pending | 0% |
+| 4 | Compliance & Outreach Infrastructure | ◐ In Progress | 50% (1/2 plans) |
 | 5 | BTL Management Campaign | ○ Pending | 0% |
 | 6 | R2R Pipeline (HMO Only) | ○ Pending | 0% |
 
@@ -78,6 +78,10 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2026-03-29 | All enrichment tiers in single file with --tier flag | Selective execution avoids running expensive tiers unnecessarily |
 | 2026-03-29 | Property address as mailing fallback | 97.5% coverage; no-email leads are PRIME direct mail candidates |
 | 2026-03-29 | Snov.io/Apify/Firecrawl skip gracefully when unconfigured | Script never fails on missing credentials |
+| 2026-03-31 | Compliance docs as version-controlled markdown in docs/compliance/ | Diffable, version-controlled, trivially convertible to HTML for website |
+| 2026-03-31 | LIA follows ICO three-part test without solicitor review | Template-based approach per user decision; accurate SJB-specific content |
+| 2026-03-31 | Privacy notice uses Article 14 format (data not from subject) | Required because landlord data sourced from public registers, not directly |
+| 2026-03-31 | Suppression records retained indefinitely | Prevents re-contacting opted-out landlords even after data refresh |
 
 ## Performance Metrics
 
@@ -93,6 +97,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 02.1-04 | 10min | 1 | 6 |
 | 03-01 | 6min | 3 | 6 |
 | 03-02 | 5min | 4 | 3 |
+| 04-01 | 3min | 2 | 3 |
 
 ## Accumulated Context
 
@@ -105,5 +110,5 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 None currently.
 
 ---
-*Last session: 2026-03-29T12:32:00Z*
-*Stopped at: Completed Phase 03 — 1,577 scored leads exported to Notion CRM with full schema (Score, Lead Type, EPC Rating, BTL/R2R suitability, contact details). Pipeline board view sorted by score.*
+*Last session: 2026-03-31T15:57:37Z*
+*Stopped at: Completed 04-01-PLAN.md — GDPR compliance docs (LIA, privacy notice, data retention policy) in docs/compliance/*

@@ -128,7 +128,7 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — GDPR compliance documentation (LIA, privacy notice, data retention policy)
+- [x] 04-01-PLAN.md — GDPR compliance documentation (LIA, privacy notice, data retention policy)
 - [ ] 04-02-PLAN.md — Suppression list migration, shared export filters, PECR entity type gate
 
 **Success Criteria:**
@@ -199,4 +199,4 @@ All 28 v1 requirements mapped. No orphans.
 
 ---
 *Roadmap created: 2026-03-28*
-*Last updated: 2026-03-31 after Phase 4 planning (2 plans created)*
+*Last updated: 2026-03-31 after 04-01 execution (compliance docs complete)*
