@@ -121,20 +121,23 @@ Plans:
 
 ## Phase 4: Compliance & Outreach Infrastructure
 
-**Goal:** GDPR/PECR documentation in place, ICO registration renewed, suppression list live, 2-3 secondary sending domains purchased and email warmup started.
+**Goal:** GDPR/PECR compliance documentation in place, suppression list live with pre-export filtering, and PECR entity type gate enforced in pipeline. Email sending infrastructure deferred until 50+ email leads available.
 
 **Requirements:** COMP-01, COMP-02, COMP-03, COMP-04
+
+**Plans:** 2 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — GDPR compliance documentation (LIA, privacy notice, data retention policy)
+- [ ] 04-02-PLAN.md — Suppression list migration, shared export filters, PECR entity type gate
 
 **Success Criteria:**
 1. Legitimate Interest Assessment (LIA) documented for B2B landlord marketing under UK GDPR
 2. PECR entity type gate enforced in pipeline — email outreach ONLY to Ltd/LLP landlords; sole traders receive direct mail and phone only
 3. Privacy notice and data retention policy created, ready to share on request
 4. Suppression list mechanism in place to track opt-outs and prevent re-contacting
-5. 2-3 secondary sending domains purchased (e.g. sjbproperty.co.uk), Zoho Mail configured, email warmup started via Instantly.ai (3-4 week process)
 
-**Tool setup pause:** Before execution, purchase secondary domains on Namecheap/Cloudflare. Set up Zoho Mail (free). Sign up for Instantly.ai ($30/mo). Renew ICO registration (£52/year).
-
-**Calendar dependency:** Email warmup takes 3-4 weeks. Start immediately upon entering this phase. BTL email campaigns (Phase 5) cannot launch until warmup is complete.
+**Note:** Email sending infrastructure (secondary domains, Zoho Mail, Instantly.ai warmup) deferred per discuss-phase decision — only 3 email leads exist. Revisit when 50+ email leads available.
 
 ---
 
@@ -177,9 +180,6 @@ Plans:
 ```
 Phase 1 ──> Phase 2 ──> Phase 02.1 ──> Phase 3 ──> Phase 4 ──> Phase 5 ──> Phase 6
 (Data)      (Sources)    (Scraping)     (Score/CRM)  (Compliance)  (BTL)       (R2R)
-                                                     |
-                                                     └─ Email warmup starts (3-4 weeks)
-                                                        Must complete before Phase 5 email
 ```
 
 ## Requirement Coverage
@@ -191,11 +191,12 @@ All 28 v1 requirements mapped. No orphans.
 | 1 | INFRA-01, INFRA-02, INFRA-03, INFRA-04 | 4 |
 | 2 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | 5 |
 | 02.1 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | 5 |
-| 3 | 2/3 | In Progress|  | 4 | COMP-01, COMP-02, COMP-03, COMP-04 | 4 |
+| 3 | INTEL-02, INTEL-03, INTEL-04, INTEL-05, CRM-01, CRM-02, CRM-03 | 7 |
+| 4 | COMP-01, COMP-02, COMP-03, COMP-04 | 4 |
 | 5 | OUT-BTL-01, OUT-BTL-02, OUT-BTL-03, OUT-BTL-04 | 4 |
 | 6 | OUT-R2R-01, OUT-R2R-02, OUT-R2R-03, OUT-R2R-04 | 4 |
 | **Total** | | **28** |
 
 ---
 *Roadmap created: 2026-03-28*
-*Last updated: 2026-03-29 after Phase 3 planning (3 plans created)*
+*Last updated: 2026-03-31 after Phase 4 planning (2 plans created)*
