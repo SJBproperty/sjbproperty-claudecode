@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const { stringify } = require('csv-stringify/sync');
+const { suppressionFilter } = require('./lib/export-filters');
 
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID;
@@ -120,6 +121,7 @@ function queryLeads(db, minScore) {
     LEFT JOIN properties p ON p.landlord_id = l.id
     WHERE l.tired_score >= ?
       AND (l.match_group_id IS NULL OR l.is_primary_record = 1)
+      AND ${suppressionFilter()}
     GROUP BY l.id
     ORDER BY l.tired_score DESC
   `).all(minScore);

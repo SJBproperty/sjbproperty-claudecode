@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { stringify } = require('csv-stringify/sync');
 const { findExactMatches, findFuzzyMatches, mergeRecords } = require('./lib/dedup');
+const { suppressionFilter, pecrEmailGate } = require('./lib/export-filters');
 
 /**
  * Build the master lead list: deduplicate all landlord records and produce
@@ -40,6 +41,7 @@ function buildLeadList(db, exportsDir) {
     FROM landlords l
     LEFT JOIN properties p ON p.landlord_id = l.id
     WHERE (l.match_group_id IS NULL OR l.is_primary_record = 1)
+      AND ${suppressionFilter()}
     GROUP BY l.id
   `).all();
 
@@ -73,6 +75,7 @@ function buildLeadList(db, exportsDir) {
     FROM landlords l
     LEFT JOIN properties p ON p.landlord_id = l.id
     WHERE (l.match_group_id IS NULL OR l.is_primary_record = 1)
+      AND ${suppressionFilter()}
       AND (l.name IS NOT NULL AND l.name != '')
       AND EXISTS (
         SELECT 1 FROM properties p2
@@ -107,6 +110,7 @@ function buildLeadList(db, exportsDir) {
     FROM landlords l
     LEFT JOIN properties p ON p.landlord_id = l.id
     WHERE l.hmo_licence_number IS NOT NULL
+      AND ${suppressionFilter()}
     GROUP BY l.id
   `).all();
 
@@ -128,6 +132,7 @@ function buildLeadList(db, exportsDir) {
     FROM landlords l
     WHERE (l.match_group_id IS NULL OR l.is_primary_record = 1)
       AND l.entity_type IN ('ltd', 'llp')
+      AND ${suppressionFilter()}
   `).all();
 
   const snovCsv = stringify(snovRows.map(r => {

@@ -69,6 +69,12 @@ function createTestDb() {
     }
   }
 
+  // Phase 3 + Phase 4 migrations
+  const { runMigration: runPhase3 } = require('../migrate-phase3');
+  const { runMigration: runPhase4 } = require('../migrate-phase4');
+  runPhase3(db);
+  runPhase4(db);
+
   return { db, dbPath };
 }
 

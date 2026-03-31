@@ -40,6 +40,9 @@ function createTestDb() {
       enrichment_source TEXT,
       enrichment_date TEXT,
       director_names TEXT,
+      suppressed INTEGER DEFAULT 0,
+      suppressed_date TEXT,
+      suppressed_reason TEXT,
       UNIQUE(company_number)
     );
 
