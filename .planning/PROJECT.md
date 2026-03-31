@@ -30,6 +30,15 @@ Build a reliable, repeatable pipeline that identifies landlords who are struggli
 - [ ] Establish onboarding process for new PM clients (inspection → proposal → agreement → handover)
 - [ ] At each phase, identify and configure optimal Claude Code compatible tools, MCPs, skills, and CLIs
 
+### Compliance (Validated)
+
+- [x] UK GDPR Legitimate Interest Assessment for B2B landlord marketing — Validated in Phase 04: Compliance & Outreach Infrastructure
+- [x] Article 14 privacy notice for data subjects not directly contacted — Validated in Phase 04: Compliance & Outreach Infrastructure
+- [x] Data retention policy (12-month review cycle) — Validated in Phase 04: Compliance & Outreach Infrastructure
+- [x] PECR entity type gate — email outreach restricted to Ltd/LLP landlords only — Validated in Phase 04: Compliance & Outreach Infrastructure
+- [x] Suppression list mechanism for opt-out tracking across all channels — Validated in Phase 04: Compliance & Outreach Infrastructure
+- [x] Shared export filters wired into all pipeline outputs — Validated in Phase 04: Compliance & Outreach Infrastructure
+
 ### Out of Scope
 
 - Education & training arm — future, not until track record is bulletproof
@@ -111,4 +120,4 @@ Build a reliable, repeatable pipeline that identifies landlords who are struggli
 | CRM setup required | No existing CRM — need to establish from scratch as part of this project | — Pending |
 
 ---
-*Last updated: 2026-03-28 — Phase 02 (Data Sources & Deduplication) complete*
+*Last updated: 2026-03-31 — Phase 04 (Compliance & Outreach Infrastructure) complete*
