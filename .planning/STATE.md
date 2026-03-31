@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: 2
+current_plan: 1
 status: executing
-last_updated: "2026-03-31T15:57:37Z"
+last_updated: "2026-03-31T16:05:02Z"
 progress:
   total_phases: 7
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 15
-  completed_plans: 14
+  completed_plans: 15
 ---
 
 # Project State: SJB Property Management Launch
@@ -19,8 +19,8 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-28)
 
 **Core value:** Build a reliable, repeatable pipeline that identifies tired landlords and converts them into long-term property management clients
-**Current focus:** Phase 04 — compliance-outreach-infrastructure
-**Current Plan:** 2
+**Current focus:** Phase 05 — BTL Management Campaign
+**Current Plan:** 1
 
 ## Current Milestone
 
@@ -35,7 +35,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2 | Data Sources & Deduplication | ● Complete | 100% (3/3 plans) |
 | 2.1 | Data Gathering & Scraping | ● Complete | 100% (4/4 plans) |
 | 3 | Lead Scoring & CRM | ● Complete | 100% (3/3 plans) |
-| 4 | Compliance & Outreach Infrastructure | ◐ In Progress | 50% (1/2 plans) |
+| 4 | Compliance & Outreach Infrastructure | ● Complete | 100% (2/2 plans) |
 | 5 | BTL Management Campaign | ○ Pending | 0% |
 | 6 | R2R Pipeline (HMO Only) | ○ Pending | 0% |
 
@@ -82,6 +82,8 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2026-03-31 | LIA follows ICO three-part test without solicitor review | Template-based approach per user decision; accurate SJB-specific content |
 | 2026-03-31 | Privacy notice uses Article 14 format (data not from subject) | Required because landlord data sourced from public registers, not directly |
 | 2026-03-31 | Suppression records retained indefinitely | Prevents re-contacting opted-out landlords even after data refresh |
+| 2026-03-31 | Shared export-filters.js library for suppression/PECR | Prevents future scripts from forgetting compliance checks |
+| 2026-03-31 | Channel-aware PECR: email=Ltd/LLP only, other channels=all entities | PECR applies to electronic comms (email), not physical mail |
 
 ## Performance Metrics
 
@@ -98,6 +100,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 03-01 | 6min | 3 | 6 |
 | 03-02 | 5min | 4 | 3 |
 | 04-01 | 3min | 2 | 3 |
+| 04-02 | 4min | 2 | 8 |
 
 ## Accumulated Context
 
@@ -110,5 +113,5 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 None currently.
 
 ---
-*Last session: 2026-03-31T15:57:37Z*
-*Stopped at: Completed 04-01-PLAN.md — GDPR compliance docs (LIA, privacy notice, data retention policy) in docs/compliance/*
+*Last session: 2026-03-31T16:05:02Z*
+*Stopped at: Completed 04-02-PLAN.md — Suppression list, PECR gate, and export filters*

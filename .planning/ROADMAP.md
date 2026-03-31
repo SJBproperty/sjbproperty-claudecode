@@ -125,7 +125,7 @@ Plans:
 
 **Requirements:** COMP-01, COMP-02, COMP-03, COMP-04
 
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 04-01-PLAN.md — GDPR compliance documentation (LIA, privacy notice, data retention policy)
@@ -188,8 +188,7 @@ All 28 v1 requirements mapped. No orphans.
 
 | Phase | Requirements | Count |
 |-------|-------------|-------|
-| 1 | INFRA-01, INFRA-02, INFRA-03, INFRA-04 | 4 |
-| 2 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | 5 |
+| 1 | INFRA-01, INFRA-02, INFRA-03, INFRA-04 | 4 | 2/2 | Complete   | 2026-03-31 | 5 |
 | 02.1 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | 5 |
 | 3 | INTEL-02, INTEL-03, INTEL-04, INTEL-05, CRM-01, CRM-02, CRM-03 | 7 |
 | 4 | COMP-01, COMP-02, COMP-03, COMP-04 | 4 |
