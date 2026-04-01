@@ -147,11 +147,11 @@ Plans:
 
 **Requirements:** OUT-BTL-01, OUT-BTL-02, OUT-BTL-03, OUT-BTL-04
 
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 05-01-PLAN.md — Stannp CSV export script with TDD (address waterfall, name parsing, suppression)
-- [ ] 05-02-PLAN.md — Outreach content assets (phone script, LinkedIn templates, email sequences)
+- [x] 05-01-PLAN.md — Stannp CSV export script with TDD (address waterfall, name parsing, suppression)
+- [x] 05-02-PLAN.md — Outreach content assets (phone script, LinkedIn templates, email sequences)
 
 **Success Criteria:**
 1. Direct mail letter template ready — professional letter pitching BTL management (10% fee, compliance handling, tenant management). EPC compliance as primary hook. Sendable via Stannp API.
@@ -203,4 +203,4 @@ All 28 v1 requirements mapped. No orphans.
 
 ---
 *Roadmap created: 2026-03-28*
-*Last updated: 2026-04-01 after Phase 5 planning (2 plans created)*
+*Last updated: 2026-04-01 after Phase 5 execution complete (2/2 plans)*

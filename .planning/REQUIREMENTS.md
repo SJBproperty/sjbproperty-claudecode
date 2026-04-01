@@ -38,9 +38,9 @@ Requirements for initial launch. Each maps to roadmap phases.
 ### Outreach — BTL Management
 
 - [x] **OUT-BTL-01**: Direct mail templates — professional letter to property address pitching BTL management services (10% fee, compliance handling, tenant management)
-- [ ] **OUT-BTL-02**: Email sequences via Instantly.ai — cold email to Ltd/LLP landlords ONLY (PECR compliant), separate sending domain with 3-4 week warmup
-- [ ] **OUT-BTL-03**: Phone scripts — prepared BTL management conversation script: pain points, service overview, consultation booking
-- [ ] **OUT-BTL-04**: LinkedIn/social outreach — connection request templates and DM sequences for landlord profiles
+- [x] **OUT-BTL-02**: Email sequences via Instantly.ai — cold email to Ltd/LLP landlords ONLY (PECR compliant), separate sending domain with 3-4 week warmup
+- [x] **OUT-BTL-03**: Phone scripts — prepared BTL management conversation script: pain points, service overview, consultation booking
+- [x] **OUT-BTL-04**: LinkedIn/social outreach — connection request templates and DM sequences for landlord profiles
 
 ### Outreach — Guaranteed Rent (R2R)
 
@@ -112,9 +112,9 @@ Deferred to after first campaign results are in.
 | CRM-02 | Phase 3 | Pending |
 | CRM-03 | Phase 3 | Pending |
 | OUT-BTL-01 | Phase 5 | Complete |
-| OUT-BTL-02 | Phase 5 | Pending |
-| OUT-BTL-03 | Phase 5 | Pending |
-| OUT-BTL-04 | Phase 5 | Pending |
+| OUT-BTL-02 | Phase 5 | Complete |
+| OUT-BTL-03 | Phase 5 | Complete |
+| OUT-BTL-04 | Phase 5 | Complete |
 | OUT-R2R-01 | Phase 6 | Pending |
 | OUT-R2R-02 | Phase 6 | Pending |
 | OUT-R2R-03 | Phase 6 | Pending |
