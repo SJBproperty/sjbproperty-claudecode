@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: Not started
-status: planning
-last_updated: "2026-03-31T16:11:39.874Z"
+current_plan: 1
+status: executing
+last_updated: "2026-04-01T16:37:41.148Z"
 progress:
   total_phases: 7
   completed_phases: 5
-  total_plans: 15
-  completed_plans: 15
+  total_plans: 17
+  completed_plans: 16
 ---
 
 # Project State: SJB Property Management Launch
@@ -19,13 +19,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-28)
 
 **Core value:** Build a reliable, repeatable pipeline that identifies tired landlords and converts them into long-term property management clients
-**Current focus:** Phase 05 — BTL Management Campaign
-**Current Plan:** Not started
+**Current focus:** Phase 05 — btl-management-campaign
+**Current Plan:** 1
 
 ## Current Milestone
 
 **Milestone 1:** Landlord Lead Generation Pipeline (v1)
-**Status:** Ready to plan
+**Status:** Executing Phase 05
 
 ## Phase Status
 
@@ -84,6 +84,8 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2026-03-31 | Suppression records retained indefinitely | Prevents re-contacting opted-out landlords even after data refresh |
 | 2026-03-31 | Shared export-filters.js library for suppression/PECR | Prevents future scripts from forgetting compliance checks |
 | 2026-03-31 | Channel-aware PECR: email=Ltd/LLP only, other channels=all entities | PECR applies to electronic comms (email), not physical mail |
+| 2026-04-01 | First director name used for Stannp salutation when multiple directors exist | Simplest approach; first listed director is usually principal |
+| 2026-04-01 | MIN(current_energy_rating) selects worst EPC as merge field | Strongest compliance hook for letter personalisation |
 
 ## Performance Metrics
 
@@ -101,6 +103,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 03-02 | 5min | 4 | 3 |
 | 04-01 | 3min | 2 | 3 |
 | 04-02 | 4min | 2 | 8 |
+| 05-01 | 2min | 1 | 2 |
 
 ## Accumulated Context
 
@@ -113,5 +116,5 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 None currently.
 
 ---
-*Last session: 2026-03-31T16:05:02Z*
-*Stopped at: Completed 04-02-PLAN.md — Suppression list, PECR gate, and export filters*
+*Last session: 2026-04-01T16:36:40Z*
+*Stopped at: Completed 05-01-PLAN.md -- Stannp CSV export*
