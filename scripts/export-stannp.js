@@ -38,7 +38,11 @@ function parseAddress(fullAddress) {
   // Remove postcode from address for further parsing
   let remaining = fullAddress;
   if (postcode) {
-    remaining = remaining.replace(/,?\s*[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}\s*$/i, '').trim();
+    // Remove ALL occurrences of the postcode (source data sometimes duplicates it)
+    const pcEscaped = postcode.replace(/\s+/g, '\\s*');
+    remaining = remaining.replace(new RegExp(',?\\s*' + pcEscaped, 'gi'), '').trim();
+    // Clean up any trailing comma left over
+    remaining = remaining.replace(/,\s*$/, '').trim();
   }
 
   const parts = remaining.split(',').map(p => p.trim()).filter(Boolean);
@@ -84,29 +88,39 @@ function selectMailingAddress(lead) {
 
 /**
  * Format name fields based on entity type and available data.
+ * Extracts titles (Mr, Mrs, Dr, etc.) into a separate field.
  * @param {object} lead - Database row
- * @returns {{ firstname: string, lastname: string, company: string }}
+ * @returns {{ title: string, firstname: string, lastname: string, company: string }}
  */
 function formatName(lead) {
+  const TITLES = ['MR', 'MRS', 'MS', 'MISS', 'DR', 'PROF', 'REV', 'SIR', 'LADY', 'LORD'];
+
+  function extractTitle(nameParts) {
+    if (nameParts.length > 1 && TITLES.includes(nameParts[0].toUpperCase())) {
+      return { title: nameParts[0], remaining: nameParts.slice(1) };
+    }
+    return { title: '', remaining: nameParts };
+  }
+
   if ((lead.entity_type === 'ltd' || lead.entity_type === 'llp') && lead.director_names) {
-    // Take the first director name (comma-separated list)
     const firstDirector = lead.director_names.split(',')[0].trim();
     const parts = firstDirector.split(/\s+/);
-    const firstname = parts[0] || '';
-    const lastname = parts.slice(1).join(' ') || '';
-    return { firstname, lastname, company: lead.name || '' };
+    const { title, remaining } = extractTitle(parts);
+    const firstname = remaining[0] || '';
+    const lastname = remaining.slice(1).join(' ') || '';
+    return { title, firstname, lastname, company: lead.name || '' };
   }
 
   if (lead.entity_type === 'ltd' || lead.entity_type === 'llp') {
-    // No director names available
-    return { firstname: '', lastname: '', company: lead.name || '' };
+    return { title: '', firstname: '', lastname: '', company: lead.name || '' };
   }
 
   // Individual or unknown
   const parts = (lead.name || '').split(/\s+/);
-  const firstname = parts[0] || '';
-  const lastname = parts.slice(1).join(' ') || '';
-  return { firstname, lastname, company: '' };
+  const { title, remaining } = extractTitle(parts);
+  const firstname = remaining[0] || '';
+  const lastname = remaining.slice(1).join(' ') || '';
+  return { title, firstname, lastname, company: '' };
 }
 
 /**
@@ -147,7 +161,7 @@ function exportStannp(db, exportsDir, batchSize = 30) {
     addressSources[addr.source]++;
 
     return {
-      title: '',
+      title: nameResult.title,
       firstname: nameResult.firstname,
       lastname: nameResult.lastname,
       company: nameResult.company,

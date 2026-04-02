@@ -12,6 +12,7 @@ db.exec(`
     source_ref TEXT,
     scraped_at TEXT NOT NULL,
     created_at TEXT DEFAULT (datetime('now')),
+    suppressed INTEGER DEFAULT 0,
     UNIQUE(company_number)
   );
 
