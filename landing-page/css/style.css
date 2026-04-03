@@ -263,6 +263,97 @@ footer p {
   margin-top: 1rem;
 }
 
+/* === Privacy Page Header === */
+.privacy-header {
+  padding: 1.5rem;
+}
+
+.privacy-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.privacy-logo-link {
+  display: inline-block;
+}
+
+.logo-small {
+  max-width: 120px;
+}
+
+.back-link {
+  color: var(--steel-blue);
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* === Prose (Privacy Notice Content) === */
+.prose {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.prose h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.prose h2 {
+  margin-top: 2rem;
+  color: var(--steel-blue);
+  text-align: left;
+}
+
+.prose h3 {
+  margin-top: 1.5rem;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.prose td,
+.prose th {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--slate);
+  text-align: left;
+}
+
+.prose th {
+  font-weight: 600;
+  color: var(--steel-blue);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose a {
+  color: var(--steel-blue);
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: var(--white);
+}
+
+.notice-version {
+  margin-top: 2rem;
+  color: var(--slate);
+}
+
 /* === Desktop Breakpoint === */
 @media (min-width: 768px) {
   .container {
