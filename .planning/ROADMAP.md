@@ -1,8 +1,8 @@
 # Roadmap: SJB Property Management Launch — Landlord Lead Generation
 
 **Created:** 2026-03-28
-**Phases:** 6
-**Requirements:** 28 mapped (100% coverage)
+**Phases:** 7
+**Requirements:** 32 mapped (100% coverage)
 **Mode:** Interactive (confirm at each step)
 **Execution:** Sequential
 
@@ -181,26 +181,53 @@ Plans:
 
 ---
 
+## Phase 7: Digital Presence Polish
+
+**Goal:** Build a standalone landing page as the QR code destination from direct mail letters, and generate 8 Instagram posts to bulk up the near-dormant profile — so landlords who receive outreach see a credible, professional, conversion-ready brand when they check SJB online.
+
+**Requirements:** DIG-01, DIG-02, DIG-03, DIG-04
+**Depends on:** Phase 5
+**Plans:** 2 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — Standalone HTML/CSS landing page with dual CTA (consultation booking + WhatsApp), trust signals, privacy page, and Netlify config
+- [ ] 07-02-PLAN.md — Instagram profile optimisation (bio, display name, pinned posts) and 8 ready-to-post content pieces with carousel design briefs
+
+**Success Criteria:**
+1. Landing page (HTML/CSS) exists with hero, pain points, services, trust signals, about, CTA sections — mobile-first responsive, using SJB brand colours (#0F222D, #8CA6BB, #FFFFFF)
+2. Dual CTA: primary consultation booking link + secondary WhatsApp deep link with pre-filled message
+3. Privacy notice converted to HTML and linked from landing page footer
+4. Netlify deployment config with security headers ready
+5. Instagram bio rewritten to target management services, display name set for discoverability
+6. 8 Instagram posts with full captions, carousel slide text, design briefs, and hashtags — ready to post
+7. Highlight cover design brief for 4 categories matching SJB brand
+
+---
+
 ## Phase Dependencies
 
 ```
 Phase 1 ──> Phase 2 ──> Phase 02.1 ──> Phase 3 ──> Phase 4 ──> Phase 5 ──> Phase 6
 (Data)      (Sources)    (Scraping)     (Score/CRM)  (Compliance)  (BTL)       (R2R)
+                                                                      └──> Phase 7
+                                                                           (Digital)
 ```
 
 ## Requirement Coverage
 
-All 28 v1 requirements mapped. No orphans.
+All 32 requirements mapped (28 v1 + 4 Phase 7). No orphans.
 
 | Phase | Requirements | Count |
 |-------|-------------|-------|
-| 1 | INFRA-01, INFRA-02, INFRA-03, INFRA-04 | 4 | 2/2 | Complete   | 2026-03-31 | 5 | 1/2 | In Progress|  | 5 |
+| 1 | INFRA-01, INFRA-02, INFRA-03, INFRA-04 | 4 |
+| 2 | DATA-01, DATA-02, DATA-03, DATA-04, INTEL-01 | 5 |
 | 3 | INTEL-02, INTEL-03, INTEL-04, INTEL-05, CRM-01, CRM-02, CRM-03 | 7 |
 | 4 | COMP-01, COMP-02, COMP-03, COMP-04 | 4 |
 | 5 | OUT-BTL-01, OUT-BTL-02, OUT-BTL-03, OUT-BTL-04 | 4 |
 | 6 | OUT-R2R-01, OUT-R2R-02, OUT-R2R-03, OUT-R2R-04 | 4 |
-| **Total** | | **28** |
+| 7 | DIG-01, DIG-02, DIG-03, DIG-04 | 4 |
+| **Total** | | **32** |
 
 ---
 *Roadmap created: 2026-03-28*
-*Last updated: 2026-04-01 after Phase 5 execution complete (2/2 plans)*
+*Last updated: 2026-04-03 after Phase 7 planning complete (2 plans)*
