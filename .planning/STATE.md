@@ -111,6 +111,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 ### Roadmap Evolution
 
 - Phase 02.1 inserted after Phase 2: Data Gathering & Scraping (URGENT) — Phase 2 built processors but never ran scrapers or Apify actors to populate DB with real data. Includes Google Maps Street View as an additional qualifying layer on top-priority leads (those already flagged by Rightmove data, low EPC grades, etc.) to help Sam visually assess property condition before contact decisions.
+- Phase 7 added: Digital Presence Polish — sharpen website, Biosite, Instagram, LinkedIn before outreach drives traffic
 
 ## Blockers
 
