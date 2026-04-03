@@ -1,0 +1,320 @@
+/* SJB Property Group — Landing Page Styles */
+/* Mobile-first responsive design */
+
+/* === Custom Properties === */
+:root {
+  --navy: #0F222D;
+  --steel-blue: #8CA6BB;
+  --slate: #46465F;
+  --white: #FFFFFF;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+}
+
+/* === Reset & Base === */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--navy);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--steel-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* === Layout === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* === Hero === */
+.hero {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.hero .logo {
+  max-width: 200px;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.hero .subtitle {
+  font-size: 1.1rem;
+  color: var(--steel-blue);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* === Buttons === */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0.5rem;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--steel-blue);
+  color: var(--navy);
+}
+
+.btn-primary:hover {
+  background-color: #7a96ab;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--steel-blue);
+  color: var(--steel-blue);
+}
+
+.btn-secondary:hover {
+  background-color: var(--steel-blue);
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cta-buttons .btn {
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+}
+
+/* === Sections === */
+section {
+  padding: 3rem 1.5rem;
+}
+
+section:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+section h2 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+/* === Cards === */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: var(--steel-blue);
+}
+
+.card p {
+  margin: 0 0 0.5rem;
+}
+
+.card-icon {
+  margin-bottom: 1rem;
+}
+
+.card-note {
+  font-size: 0.85rem;
+  color: var(--steel-blue);
+  font-style: italic;
+}
+
+/* === Trust — Stats Grid === */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  padding: 1rem;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--steel-blue);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.25rem;
+}
+
+/* === Credentials === */
+.credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.badge {
+  background: rgba(140, 166, 187, 0.15);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* === About === */
+.about p {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* === Bottom CTA === */
+.cta-bottom {
+  text-align: center;
+}
+
+.cta-bottom p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: var(--steel-blue);
+}
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid var(--slate);
+  margin-top: 3rem;
+}
+
+footer p {
+  margin: 0.5rem 0;
+}
+
+.footer-company {
+  font-weight: 600;
+  font-family: var(--font-heading);
+}
+
+.footer-links a {
+  color: var(--steel-blue);
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  font-size: 0.85rem;
+  color: var(--slate);
+  margin-top: 1rem;
+}
+
+/* === Desktop Breakpoint === */
+@media (min-width: 768px) {
+  .container {
+    padding: 3rem 2rem;
+  }
+
+  section {
+    padding: 4rem 2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  section h2 {
+    font-size: 2rem;
+  }
+
+  .cta-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .cta-buttons .btn {
+    width: auto;
+    max-width: none;
+  }
+
+  /* Pain Points — 3 columns */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card-grid .card {
+    margin-bottom: 0;
+  }
+
+  /* Services — 2 columns */
+  .service-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .service-grid .card {
+    margin-bottom: 0;
+  }
+
+  /* Stats — 4 columns */
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
