@@ -18,7 +18,7 @@
 |-------|--------|
 | Data controller | SJB Property Group Ltd |
 | Contact email | sam@sjbproperty.com |
-| Website | sjbpropertygroup.com |
+| Website | sjbpropertygroup.com/landlord-privacy-policy |
 | ICO registration | Current (reference on file) |
 
 SJB Property Group is a property investment and management company based in Greater Manchester, specialising in Buy-to-Let (BTL) management and Rent-to-Rent (R2R) guaranteed rent for House in Multiple Occupation (HMO) properties.

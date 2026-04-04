@@ -1,19 +1,26 @@
 /**
- * Stannp-format CSV export — pulls top-scored BTL landlord leads from the
- * database, applies suppression and address selection logic, and outputs a
- * file ready for Stannp's bulk recipient import.
+ * Stannp-format CSV export — pulls leads from the Notion "SJB Leads Pipeline"
+ * database (the curated source of truth) and outputs a file ready for Stannp's
+ * bulk recipient import.
  *
  * Usage:
- *   node scripts/export-stannp.js [batchSize]
+ *   node scripts/export-stannp.js [--owner-only] [--min-score=N] [--exclude-mixed-use]
+ *
+ * Options:
+ *   --owner-only         Only include leads with an Owner Address (default: include all with any address)
+ *   --min-score=N        Minimum score threshold (default: 0)
+ *   --exclude-mixed-use  Exclude leads with Priority "Mixed Use" (default: excluded)
  *
  * Output:
- *   data/exports/stannp-btl-YYYY-MM-DD.csv
+ *   data/exports/stannp-YYYY-MM-DD.csv
  */
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const { stringify } = require('csv-stringify/sync');
-const { suppressionFilter } = require('./lib/export-filters');
+const NOTION_API_KEY = process.env.NOTION_API_KEY;
+const DATABASE_ID = '5543ca79-9d90-401b-844d-f490423e354a';
+const EXPORTS_DIR = path.join(__dirname, '..', 'data', 'exports');
 
 /**
  * Extract a UK postcode from the end of an address string.
@@ -35,29 +42,19 @@ function parseAddress(fullAddress) {
   if (!fullAddress) return { line1: '', line2: '', city: '', postcode: '' };
 
   const postcode = extractPostcode(fullAddress) || '';
-  // Remove postcode from address for further parsing
   let remaining = fullAddress;
   if (postcode) {
-    // Remove ALL occurrences of the postcode (source data sometimes duplicates it)
     const pcEscaped = postcode.replace(/\s+/g, '\\s*');
     remaining = remaining.replace(new RegExp(',?\\s*' + pcEscaped, 'gi'), '').trim();
-    // Clean up any trailing comma left over
     remaining = remaining.replace(/,\s*$/, '').trim();
   }
 
   const parts = remaining.split(',').map(p => p.trim()).filter(Boolean);
 
-  if (parts.length === 0) {
-    return { line1: '', line2: '', city: '', postcode };
-  }
-  if (parts.length === 1) {
-    return { line1: parts[0], line2: '', city: '', postcode };
-  }
-  if (parts.length === 2) {
-    return { line1: parts[0], line2: '', city: parts[1], postcode };
-  }
+  if (parts.length === 0) return { line1: '', line2: '', city: '', postcode };
+  if (parts.length === 1) return { line1: parts[0], line2: '', city: '', postcode };
+  if (parts.length === 2) return { line1: parts[0], line2: '', city: parts[1], postcode };
 
-  // 3+ parts: first = line1, last = city, middle joined = line2
   const line1 = parts[0];
   const city = parts[parts.length - 1];
   const line2 = parts.slice(1, -1).join(', ');
@@ -65,34 +62,14 @@ function parseAddress(fullAddress) {
 }
 
 /**
- * Select the best mailing address for a lead using the waterfall:
- * owner_address > mailing_address > property address
- * @param {object} lead - Database row with address fields
- * @returns {{ line1: string, line2: string, city: string, postcode: string, source: string }}
- */
-function selectMailingAddress(lead) {
-  if (lead.owner_address) {
-    return { ...parseAddress(lead.owner_address), source: 'owner' };
-  }
-  if (lead.mailing_address) {
-    return { ...parseAddress(lead.mailing_address), source: 'mailing' };
-  }
-  if (lead.first_property_address) {
-    const propAddr = lead.first_postcode
-      ? `${lead.first_property_address}, ${lead.first_postcode}`
-      : lead.first_property_address;
-    return { ...parseAddress(propAddr), source: 'property' };
-  }
-  return { line1: '', line2: '', city: '', postcode: '', source: 'none' };
-}
-
-/**
- * Format name fields based on entity type and available data.
- * Extracts titles (Mr, Mrs, Dr, etc.) into a separate field.
- * @param {object} lead - Database row
+ * Format name fields. Extracts titles (Mr, Mrs, Dr, etc.) into a separate field.
+ * Detects company names by suffix and routes them to the company field.
+ * @param {string} leadName - The lead name from Notion
+ * @param {string} contactName - The contact name from Notion (director/individual)
+ * @param {string} company - The company field from Notion
  * @returns {{ title: string, firstname: string, lastname: string, company: string }}
  */
-function formatName(lead) {
+function formatName(leadName, contactName, company) {
   const TITLES = ['MR', 'MRS', 'MS', 'MISS', 'DR', 'PROF', 'REV', 'SIR', 'LADY', 'LORD'];
 
   function extractTitle(nameParts) {
@@ -102,65 +79,172 @@ function formatName(lead) {
     return { title: '', remaining: nameParts };
   }
 
-  if ((lead.entity_type === 'ltd' || lead.entity_type === 'llp') && lead.director_names) {
-    const firstDirector = lead.director_names.split(',')[0].trim();
-    const parts = firstDirector.split(/\s+/);
+  // If there's a contact name, use it for first/last
+  // Contact names may be in "SURNAME, FirstName MiddleName" format or have multiple directors
+  if (contactName && contactName.trim()) {
+    // Take just the first person if multiple directors listed (split on repeated SURNAME patterns)
+    let firstPerson = contactName.trim().split(/,\s*(?=[A-Z]{2,})/)[0].trim();
+    // Handle "SURNAME, FirstName" format
+    if (firstPerson.includes(',')) {
+      const [surname, ...rest] = firstPerson.split(',').map(s => s.trim());
+      const firstNames = rest.join(' ').trim();
+      const allParts = firstNames ? `${firstNames} ${surname}` : surname;
+      const parts = allParts.split(/\s+/);
+      const { title, remaining } = extractTitle(parts);
+      return {
+        title,
+        firstname: remaining[0] || '',
+        lastname: remaining.slice(1).join(' ') || '',
+        company: company || '',
+      };
+    }
+    const parts = firstPerson.split(/\s+/);
     const { title, remaining } = extractTitle(parts);
-    const firstname = remaining[0] || '';
-    const lastname = remaining.slice(1).join(' ') || '';
-    return { title, firstname, lastname, company: lead.name || '' };
+    return {
+      title,
+      firstname: remaining[0] || '',
+      lastname: remaining.slice(1).join(' ') || '',
+      company: company || '',
+    };
   }
 
-  if (lead.entity_type === 'ltd' || lead.entity_type === 'llp') {
-    return { title: '', firstname: '', lastname: '', company: lead.name || '' };
+  // If lead name looks like a company, put it in company field
+  const nameUpper = (leadName || '').toUpperCase();
+  if (/\b(LTD|LIMITED|LLP|PLC|HOLDINGS|TRUSTEES|TRUST|CIO)\b/.test(nameUpper)) {
+    return { title: '', firstname: '', lastname: '', company: leadName || '' };
   }
 
-  // Individual or unknown
-  const parts = (lead.name || '').split(/\s+/);
+  // Individual name
+  const parts = (leadName || '').split(/\s+/);
   const { title, remaining } = extractTitle(parts);
-  const firstname = remaining[0] || '';
-  const lastname = remaining.slice(1).join(' ') || '';
-  return { title, firstname, lastname, company: '' };
+  return {
+    title,
+    firstname: remaining[0] || '',
+    lastname: remaining.slice(1).join(' ') || '',
+    company: company || '',
+  };
 }
 
 /**
- * Export Stannp-format CSV from the database.
- * @param {import('better-sqlite3').Database} db
- * @param {string} exportsDir - Output directory
- * @param {number} [batchSize=30] - Max rows to export
- * @returns {{ rowCount: number, filePath: string, addressSources: object }}
+ * Get plain text from a Notion rich_text property.
  */
-function exportStannp(db, exportsDir, batchSize = 30) {
-  fs.mkdirSync(exportsDir, { recursive: true });
+function getText(prop) {
+  if (!prop || !prop.rich_text || !prop.rich_text.length) return '';
+  return prop.rich_text.map(t => t.plain_text).join('');
+}
 
-  const rows = db.prepare(`
-    SELECT l.id, l.name, l.entity_type, l.owner_address, l.mailing_address,
-      l.director_names, l.tired_score, l.btl_suitable,
-      GROUP_CONCAT(DISTINCT p.address) as property_addresses,
-      MIN(p.current_energy_rating) as worst_epc,
-      COUNT(DISTINCT p.id) as property_count,
-      MIN(p.address) as first_property_address,
-      MIN(p.postcode) as first_postcode
-    FROM landlords l
-    LEFT JOIN properties p ON p.landlord_id = l.id
-    WHERE (l.match_group_id IS NULL OR l.is_primary_record = 1)
-      AND ${suppressionFilter()}
-      AND l.btl_suitable = 1
-      AND (l.owner_address IS NOT NULL OR l.mailing_address IS NOT NULL
-           OR EXISTS (SELECT 1 FROM properties p2 WHERE p2.landlord_id = l.id))
-    GROUP BY l.id
-    ORDER BY l.tired_score DESC
-    LIMIT ?
-  `).all(batchSize);
+/**
+ * Get title text from a Notion title property.
+ */
+function getTitle(prop) {
+  if (!prop || !prop.title || !prop.title.length) return '';
+  return prop.title.map(t => t.plain_text).join('');
+}
+
+/**
+ * Fetch all pages from Notion database with pagination.
+ * Uses the REST API directly (data source IDs require POST to /databases/{id}/query).
+ */
+async function fetchAllLeads() {
+  const allResults = [];
+  let cursor;
+  let page = 0;
+
+  do {
+    page++;
+    const body = { page_size: 100 };
+    if (cursor) body.start_cursor = cursor;
+
+    const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${NOTION_API_KEY}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(`Notion API error: ${err.message}`);
+    }
+
+    const data = await res.json();
+    allResults.push(...data.results);
+    cursor = data.has_more ? data.next_cursor : undefined;
+    process.stderr.write(`  Fetched page ${page}: ${data.results.length} leads (${allResults.length} total)\n`);
+  } while (cursor);
+
+  return allResults;
+}
+
+/**
+ * Export Stannp-format CSV from Notion database.
+ */
+async function exportStannp(options = {}) {
+  const { ownerOnly = false, minScore = 0, excludeMixedUse = true } = options;
+  const ALLOWED_LEAD_TYPES = ['BTL', 'R2R', 'BTL + R2R'];
+  fs.mkdirSync(EXPORTS_DIR, { recursive: true });
+
+  console.log('Fetching leads from Notion...');
+  const allLeads = await fetchAllLeads();
+  console.log(`  Total leads in Notion: ${allLeads.length}`);
 
   const addressSources = { owner: 0, mailing: 0, property: 0, none: 0 };
+  let skippedNoAddress = 0;
+  let skippedScore = 0;
+  let skippedLeadType = 0;
+  let skippedMixedUse = 0;
 
-  const csvData = rows.map(row => {
-    const nameResult = formatName(row);
-    const addr = selectMailingAddress(row);
-    addressSources[addr.source]++;
+  const csvData = [];
 
-    return {
+  for (const page of allLeads) {
+    const props = page.properties;
+    const leadName = getTitle(props.Lead);
+    if (!leadName) continue;
+
+    // Lead type filter — only BTL, R2R, BTL+R2R
+    const leadType = props['Lead Type']?.select?.name || '';
+    if (!ALLOWED_LEAD_TYPES.includes(leadType)) { skippedLeadType++; continue; }
+
+    // Mixed use filter — exclude properties flagged as mixed use
+    const priority = props.Priority?.select?.name || '';
+    if (excludeMixedUse && priority.includes('Mixed Use')) { skippedMixedUse++; continue; }
+
+    const score = props.Score?.number ?? 0;
+    if (score < minScore) { skippedScore++; continue; }
+
+    const ownerAddress = getText(props['Owner Address']);
+    const mailingAddress = getText(props['Mailing Address']);
+    const properties = getText(props.Properties);
+    const firstProperty = properties ? properties.split('\n')[0] : '';
+
+    // Address selection: owner > mailing > property
+    let addr, source;
+    if (ownerAddress) {
+      addr = parseAddress(ownerAddress);
+      source = 'owner';
+    } else if (!ownerOnly && mailingAddress) {
+      addr = parseAddress(mailingAddress);
+      source = 'mailing';
+    } else if (!ownerOnly && firstProperty) {
+      addr = parseAddress(firstProperty);
+      source = 'property';
+    } else {
+      skippedNoAddress++;
+      continue;
+    }
+    addressSources[source]++;
+
+    const contactName = getText(props['Contact Name']);
+    const company = getText(props.Company);
+    const nameResult = formatName(leadName, contactName, company);
+
+    const epcRating = props['EPC Rating']?.select?.name || '';
+    const propertyCount = props['Property Count']?.number || 0;
+
+    csvData.push({
       title: nameResult.title,
       firstname: nameResult.firstname,
       lastname: nameResult.lastname,
@@ -170,33 +254,42 @@ function exportStannp(db, exportsDir, batchSize = 30) {
       city: addr.city,
       postcode: addr.postcode,
       country: 'GB',
-      epc_rating: row.worst_epc || '',
-      property_count: row.property_count || 0,
-      property_address: row.first_property_address || '',
-    };
-  });
+      epc_rating: epcRating === 'N/A' ? '' : epcRating,
+      property_count: propertyCount,
+      property_address: firstProperty,
+    });
+  }
 
   const csv = stringify(csvData, { header: true });
-
   const dateStamp = new Date().toISOString().split('T')[0];
-  const fileName = `stannp-btl-${dateStamp}.csv`;
-  const filePath = path.join(exportsDir, fileName);
+  const fileName = `stannp-${dateStamp}.csv`;
+  const filePath = path.join(EXPORTS_DIR, fileName);
   fs.writeFileSync(filePath, csv);
 
-  console.log(`Stannp export complete:`);
-  console.log(`  Leads: ${rows.length}`);
-  console.log(`  File: ${filePath}`);
+  console.log(`\nStannp export complete:`);
+  console.log(`  Leads exported: ${csvData.length}`);
+  console.log(`  Skipped (no address): ${skippedNoAddress}`);
+  console.log(`  Skipped (lead type not BTL/R2R): ${skippedLeadType}`);
+  console.log(`  Skipped (mixed use): ${skippedMixedUse}`);
+  console.log(`  Skipped (below min score ${minScore}): ${skippedScore}`);
   console.log(`  Address sources: owner=${addressSources.owner}, mailing=${addressSources.mailing}, property=${addressSources.property}`);
+  console.log(`  File: ${filePath}`);
 
-  return { rowCount: rows.length, filePath, addressSources };
+  return { rowCount: csvData.length, filePath, addressSources };
 }
 
-module.exports = { exportStannp, extractPostcode, parseAddress, selectMailingAddress, formatName };
+module.exports = { exportStannp, extractPostcode, parseAddress, formatName };
 
 // CLI entry point
 if (require.main === module) {
-  const db = require('./lib/db');
-  const { EXPORTS_DIR } = require('./lib/config');
-  const batchSize = parseInt(process.argv[2]) || 30;
-  exportStannp(db, EXPORTS_DIR, batchSize);
+  const args = process.argv.slice(2);
+  const ownerOnly = args.includes('--owner-only');
+  const includeMixedUse = args.includes('--include-mixed-use');
+  const scoreArg = args.find(a => a.startsWith('--min-score='));
+  const minScore = scoreArg ? parseInt(scoreArg.split('=')[1]) : 0;
+
+  exportStannp({ ownerOnly, minScore, excludeMixedUse: !includeMixedUse }).catch(err => {
+    console.error('Export failed:', err.message);
+    process.exit(1);
+  });
 }
