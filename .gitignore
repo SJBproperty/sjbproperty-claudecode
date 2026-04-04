@@ -9,6 +9,8 @@ env/
 # Allow SJB logo for public access
 !Video/sjb-property-video/public/logo.png
 !landing-page/img/logo-white.png
+!landing-page/img/qr-code.png
+!docs/compliance/*.pdf
 Generated Images/
 1.SJB Property/
 Business Overview/
