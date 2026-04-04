@@ -191,7 +191,7 @@ Plans:
 
 Plans:
 - [x] 07-01-PLAN.md — Standalone HTML/CSS landing page with dual CTA (consultation booking + WhatsApp), trust signals, privacy page, and Netlify config
-- [ ] 07-02-PLAN.md — Instagram profile optimisation (bio, display name, pinned posts) and 8 ready-to-post content pieces with carousel design briefs
+- [x] 07-02-PLAN.md — Instagram profile optimisation (bio, display name, pinned posts) and 8 ready-to-post content pieces with carousel design briefs
 
 **Success Criteria:**
 1. Landing page (HTML/CSS) exists with hero, pain points, services, trust signals, about, CTA sections — mobile-first responsive, using SJB brand colours (#0F222D, #8CA6BB, #FFFFFF)
