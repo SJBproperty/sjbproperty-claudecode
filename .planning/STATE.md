@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 current_plan: 2
 status: executing
-last_updated: "2026-04-01T16:41:20Z"
+last_updated: "2026-04-04T09:19:16.236Z"
 progress:
-  total_phases: 7
-  completed_phases: 5
-  total_plans: 17
-  completed_plans: 17
+  total_phases: 8
+  completed_phases: 6
+  total_plans: 19
+  completed_plans: 18
 ---
 
 # Project State: SJB Property Management Launch
@@ -19,13 +19,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-28)
 
 **Core value:** Build a reliable, repeatable pipeline that identifies tired landlords and converts them into long-term property management clients
-**Current focus:** Phase 05 — btl-management-campaign
+**Current focus:** Phase 07 — digital-presence-polish
 **Current Plan:** 1
 
 ## Current Milestone
 
 **Milestone 1:** Landlord Lead Generation Pipeline (v1)
-**Status:** Executing Phase 05
+**Status:** Executing Phase 07
 
 ## Phase Status
 
@@ -86,6 +86,9 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 2026-03-31 | Channel-aware PECR: email=Ltd/LLP only, other channels=all entities | PECR applies to electronic comms (email), not physical mail |
 | 2026-04-01 | First director name used for Stannp salutation when multiple directors exist | Simplest approach; first listed director is usually principal |
 | 2026-04-01 | MIN(current_energy_rating) selects worst EPC as merge field | Strongest compliance hook for letter personalisation |
+| 2026-04-03 | Gold accent colour (#C9A84C) added for CTA buttons and key stats | Improves visual hierarchy and conversion on landing page |
+| 2026-04-03 | Microsoft Bookings for consultation CTA instead of Cal.com | Live booking tool already in use by SJB |
+| 2026-04-03 | Renters' Rights Bill added as fourth pain point card | Strengthens compliance urgency hook for landlords |
 
 ## Performance Metrics
 
@@ -105,6 +108,7 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 | 04-02 | 4min | 2 | 8 |
 | 05-01 | 2min | 1 | 2 |
 | 05-02 | 2min | 2 | 3 |
+| Phase 07-01 P01 | 15min | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -118,5 +122,5 @@ See: .planning/PROJECT.md (updated 2026-03-28)
 None currently.
 
 ---
-*Last session: 2026-04-01T16:41:20Z*
-*Stopped at: Completed 05-02-PLAN.md -- outreach content assets*
+*Last session: 2026-04-04T09:19:00Z*
+*Stopped at: Completed 07-01-PLAN.md -- landing page*

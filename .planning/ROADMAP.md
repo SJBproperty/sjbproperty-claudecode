@@ -190,7 +190,7 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 07-01-PLAN.md — Standalone HTML/CSS landing page with dual CTA (consultation booking + WhatsApp), trust signals, privacy page, and Netlify config
+- [x] 07-01-PLAN.md — Standalone HTML/CSS landing page with dual CTA (consultation booking + WhatsApp), trust signals, privacy page, and Netlify config
 - [ ] 07-02-PLAN.md — Instagram profile optimisation (bio, display name, pinned posts) and 8 ready-to-post content pieces with carousel design briefs
 
 **Success Criteria:**
