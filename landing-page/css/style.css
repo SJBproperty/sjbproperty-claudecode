@@ -5,6 +5,7 @@
 :root {
   --navy: #0F222D;
   --steel-blue: #8CA6BB;
+  --gold: #D3A971;
   --slate: #46465F;
   --white: #FFFFFF;
   --font-heading: 'Montserrat', sans-serif;
@@ -71,7 +72,7 @@ a:hover {
 
 .hero .subtitle {
   font-size: 1.1rem;
-  color: var(--steel-blue);
+  color: var(--gold);
   max-width: 600px;
   margin: 0 auto 2rem;
 }
@@ -164,7 +165,7 @@ section h2 {
 
 .card-note {
   font-size: 0.85rem;
-  color: var(--steel-blue);
+  color: var(--gold);
   font-style: italic;
 }
 
@@ -214,6 +215,30 @@ section h2 {
   white-space: nowrap;
 }
 
+/* === About Button === */
+.about-cta {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.btn-outline-gold {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-gold:hover {
+  background-color: var(--gold);
+  color: var(--navy);
+  text-decoration: none;
+}
+
 /* === About === */
 .about p {
   max-width: 700px;
@@ -229,7 +254,7 @@ section h2 {
 .cta-bottom p {
   max-width: 600px;
   margin: 0 auto 2rem;
-  color: var(--steel-blue);
+  color: var(--gold);
 }
 
 /* === Footer === */
@@ -382,10 +407,10 @@ footer p {
     max-width: none;
   }
 
-  /* Pain Points — 3 columns */
+  /* Pain Points — 4 columns */
   .card-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
   }
 
